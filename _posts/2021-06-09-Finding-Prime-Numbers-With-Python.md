@@ -8,7 +8,7 @@ tags: [Python, Primes]
 ## introduction
 In this post I'm going to run through a function in Python that can quickly find all the Prime numbers below a given value.  For example, if I passed the function a value of 100, it would find all the prime numbers below 100.
 
-I've created this project to demonstrate the use of some basic python functionality.  There are a few good reasons for using Python to solve mathematical problems like this:  
+I've created this project to demonstrate the use of some basic Python functionality in a simple mathematical problem.  There are a few good reasons for using Python to solve mathematical problems like this:  
 
 * Python has simple and clean syntax that makes it easy to write and understand code. This is important for a math-heavy algorithm like prime number calculation.
 * It has built-in big number support through the 'decimal' module, which allows me to work with large numbers without worry of overflow. This is crucial for prime calculations.
@@ -17,9 +17,10 @@ I've created this project to demonstrate the use of some basic python functional
 * Python code can be written and tested interactively using the REPL. That would allow me to prototype and debug each part of the algorithm easily.
 * Python can later be compiled to native machine code using tools like Cython or Numba if I need to optimize for speed. So I can start simple and optimize later if needed.
 
-Of course, many other languages like C, Rust, Julia etc would also work. However, I find Python strikes a nice balance between simplicity, available libraries, and performance for this type of math-focused code. The main thing is using a language that makes the algorithm clear and maintainable.
+Of course, many other languages like C, Rust, Julia etc would also work. However, I find Python strikes a nice balance between simplicity, available libraries, and performance for this type of maths-focused code. The main thing is using a language that makes the algorithm clear and maintainable.
 
-## what is a prime number?
+---
+### what is a prime number?
 A prime number is a whole number greater than 1 that can only be divided evenly by 1 and itself. By evenly, I mean to produce a whole number. For example, 5 is a prime number because it can only be divided evenly by 1 and 5. It cannot be divided evenly by any other whole numbers.
 
 Some key things about prime numbers:
@@ -32,7 +33,8 @@ Some key things about prime numbers:
 
 So in simple terms, a prime number is a lone wolf - it can't be evenly split into smaller whole number groups. It's only divisible by itself and 1. This makes primes the atoms of the math world. 
 
-## random dad joke alert
+---
+#### random dad joke alert
 
 ```ruby
 # What do prime numbers and stoners have in common?  They get more spaced out the higher they get...
@@ -48,7 +50,7 @@ First let's set up a variable that will act as the upper limit of numbers we wan
 primes_limit = 20
 ```
 
-The smallest true Prime number is 2, so we want to start by creating a list of numbers than need checking so every integer between 2 and what we set above as the upper bound which in this case was 20. We use **primes_limit+1** as the range logic is not inclusive of the upper limit we set there
+The smallest true Prime number is 2, so we want to start by creating a list of numbers than need checking so every integer between 2 and what we set above as the upper bound which in this case was 20. We use *primes_limit+1* as the range logic is not inclusive of the upper limit we set there
 
 Instead of using a list, though, we're going to use a set.  The reason for this is that sets have some special functions that will allow us to eliminate non-primes during our search.  You'll see what I mean soon...
 
@@ -95,7 +97,7 @@ Now we're going to do a special trick to check our remaining numbers_to_check fo
 We're going to again use a set rather than a list, because it allows us some special functionality that we'll use in a minute, which is the magic of this approach.
 
 ```ruby
-multiples = set(range(prime*2, n+1, prime))
+multiples = set(range(prime*2, primes_limit+1, prime))
 ```
 
 Remember that when creating a range the syntax is range(start, stop, step). For the starting point - we don't need our number as that has already been added as a prime, so let's start our range of multiples at 2 * our number as that is the first multiple, in our case, our number is 2 so the first multiple will be 4. If the number we were checking was 3 then the first multiple would be 6 - and so on.
@@ -181,10 +183,10 @@ Amazing!
 The next thing to do would be to put it into a neat function, which you can see below:
 
 ```ruby
-def find_primes_up_to(n):
+def find_primes_up_to(primes_limit):
     
     # number range to be checked
-    numbers_to_check = set(range(2, n+1))
+    numbers_to_check = set(range(2, primes_limit+1))
 
     # empty list to append discovered primes to
     primes_list = []
@@ -193,12 +195,12 @@ def find_primes_up_to(n):
     while numbers_to_check:
         prime = numbers_to_check.pop()
         primes_list.append(prime)
-        multiples = set(range(prime*2, n+1, prime))
+        multiples = set(range(prime*2, primes_limit+1, prime))
         numbers_to_check.difference_update(multiples)
         
     prime_count = len(primes_list)
     largest_prime = max(primes_list)
-    print(f"There are {prime_count} prime numbers between 1 and {n}, the largest of which is {largest_prime}")
+    print(f"There are {prime_count} prime numbers between 1 and {primes_limit}, the largest of which is {largest_prime}")
 ```
 
 Now we can jut pass the function the upper bound of our search and it will do the rest!
