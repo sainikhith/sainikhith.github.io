@@ -5,9 +5,21 @@ image: "/posts/primes_image.jpeg"
 tags: [Python, Primes]
 ---
 
+## Introduction
 In this post I'm going to run through a function in Python that can quickly find all the Prime numbers below a given value.  For example, if I passed the function a value of 100, it would find all the prime numbers below 100!
 
-If you're not sure what a Prime number is, it is a number that can only be divided wholly by itself and one so 7 is a prime number as no other numbers apart from 7 or 1 divide cleanly into it 8 is not a prime number as while eight and one divide into it, so do 2 and 4
+## What is a prime number?
+A prime number is a whole number greater than 1 that can only be divided evenly by 1 and itself. By evenly, I mean to produce a whole number. For example, 5 is a prime number because it can only be divided evenly by 1 and 5. It cannot be divided evenly by any other whole numbers.
+
+Some key things about prime numbers:
+
+* They have exactly 2 factors - 1 and the number itself. For example, the only factors of 5 are 1 and 5.
+2 is the only even prime number. All other prime numbers are odd.
+* There is no highest prime number. We can keep finding larger and larger prime numbers forever.
+* Prime numbers get more spread out as the numbers get larger. For small numbers there are lots of primes, but for very big numbers you have to look farther to find the next prime.
+* Prime numbers are important in many areas of math and encryption. But at a basic level, they are just numbers that can only be evenly divided by themselves and 1.
+
+So in simple terms, a prime number is a lone wolf - it can't be evenly split into smaller whole number groups. It's only divisible by itself and 1. This makes primes the atoms of the math world. 
 
 Let's get into it!
 
