@@ -10,14 +10,14 @@ In this post I'm going to run through creating a function in Python that can qui
 
 I've created this project to demonstrate the use of some basic Python functionality in a simple mathematical problem.  There are a few good reasons for using Python to solve mathematical problems like this:  
 
-* Python has simple and clean syntax that makes it easy to write and understand code. This is important for a math-heavy algorithm like prime number calculation.
+* Python has simple and clean syntax that makes it easy to write and understand code. This is important for a maths-heavy algorithm like prime number calculation.
 * It has built-in big number support through the 'decimal' module, which allows me to work with large numbers without worry of overflow. This is crucial for prime calculations.
 * Python has libraries that provide highly optimised functions and data structures for numerical computing, which can really speed up the processing.
 * It's easy to write Python code in a functional style, with higher-order functions like 'filter', 'map', etc. This lends itself well to a prime checking algorithm.
 * Python code can be written and tested interactively using the REPL. That would allow me to prototype and debug each part of the algorithm easily.
 * Python can later be compiled to native machine code using tools like Cython or Numba if I need to optimize for speed. So I can start simple and optimize later if needed.
 
-Of course, many other languages like C, Rust, Julia etc would also work. However, I find Python strikes a nice balance between simplicity, available libraries, and performance for this type of maths-focused code. The main thing is using a language that makes the algorithm clear and maintainable.
+Of course, many other languages like C, C++, R, Rust, Julia etc would also work. However, I find Python strikes a nice balance between simplicity, available libraries, and performance for this type of maths-focused code. The main thing is using a language that makes the algorithm clear and maintainable.
 
 ---
 ### what is a prime number?
@@ -47,7 +47,12 @@ Ok, Let's get into our design.
 
 ---
 ## design
-First let's think about the variables and data types we want to use.  We need to start with an integer to hold the limit we are checking up to.  Let's call that primes_limit.
+So we understand what we are trying to achieve functionally.
+
+We want a function that answers the question "what are all the primes up to a certain nummber, that the user can specify", and returns a list of the prime numbers to the user.  We also want this to happen as quickly as we can.
+
+
+First let's think about the variables and data types we want to use in our function.  We need to start with an integer to hold the limit we are checking up to, that will be passed into the function.  Let's call that primes_limit.
 
 ```ruby
 primes_limit = 20
@@ -326,10 +331,10 @@ The largest prime is 99991.
 The calculation took 5.072026491165161 seconds.
 ```
 
-However, because we have to sort the list for each iteration of the loop in order to get the minimum value, it's a lot slower than what we saw with pop()!
+Because we have to sort the list for each iteration of the loop in order to get the minimum value, it's a lot slower than what we saw with version 1.  Especially as we go for higher numbers of primes and longer lists!
 
 ## solution version 3
-After further research we find there is such a thing as an OrderedSet in the ordered_set package.  You have to install it with pip install ordered_set before you can use it. 
+After further research we find there is such a thing as an OrderedSet in the ordered_set package.  You have to install it with pip install ordered_set before you can use it. Optimistically, we will try this out.
 
 Let's try this and see what happens.  Here is the code:
 
