@@ -68,20 +68,21 @@ primes_list = []
 
 We're going to use a while loop to iterate through our set and check for primes, but before we construct that I find it can be valuable to think through the logic first.  
 
->Capture the primes limit that we are going to check up to.  
->  
->Create a list of numbers to check, between 2 and the primes limit, inclusively.  
->  
->while we still have numbers remaining in our list:  
->    find the lowest number.  This will be a prime.  
->    Add the prime to our found primes list.  
->    remove the prime from the numbers to check list.  
->    find all the multiples of our prime between the prime and the primes limit we are checking up to.  
->    remove all these multiples of our prime from the remaining numbers to check list.  They are definitely not primes, since they have  >  >    our prime as a factor.  
->    Repeat until we have no more numbers in our remaining list.  
->  
->Calculate summary data.  
->Return the list of primes found to the caller.  
+```ruby
+Capture the primes limit that we are going to check up to.  
+Create a list of numbers to check, between 2 and the primes limit, inclusively.  
+
+while we still have numbers remaining in our list:  
+    find the lowest number.  This will be a prime.  
+    Add the prime to our found primes list.  
+    remove the prime from the numbers to check list.  
+    find all the multiples of our prime between the prime and the primes limit we are checking up to.  
+    emove all these multiples of our prime from the remaining numbers to check list.  They are definitely not primes, since they have    our prime as a factor.  
+    Repeat until we have no more numbers in our remaining list.  
+  
+Calculate summary data.  
+Return the list of primes found to the caller.  
+```
 
 So, we have our set of numbers (called numbers_to_check to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it.
 
