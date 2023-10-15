@@ -51,75 +51,65 @@ First we define what we are trying to achieve.
 
 We want to create a function that answers the question "what are all the primes up to a certain number, specified by the  caller.", that returns a list of the prime numbers to the user.  We also want this to happen as quickly as we can.
 
-
->Capture the primes limit that we are going to check up to.
->
->Create a list of numbers to check, between 2 and the primes limit, inclusively.
->
->while we still have numbers remaining in our list:
->    find the lowest number.  This will be a prime.
->    Add the prime to our found primes list.
->    remove the prime from the numbers to check list.
->    find all the multiples of our prime between the prime and the primes limit we are checking up to.
->    remove all these multiples of our prime from the remaining numbers to check list.  They are definitely not primes, since they have our >    prime as a factor.
->    Repeat until we have no more numbers in our remaining list.
->
->Calculate summary data.
->Return the list of primes found to the caller.
-
-
 Now, let's think about the variables and data types we want to use in our function.  We need to start with an integer to hold the limit we are checking up to, that will be passed into the function.  Let's call that primes_limit.
-
-```ruby
-primes_limit = 20
-```
 
 We know the smallest true Prime number is 2.  We are going to create a list of all numbers that we need to check, which will be every integer between 2 and our upper bound which in this case was 20. We use *primes_limit + 1* as the range logic we want to use to define the list of numbers to check, because the upper bound parameter of the range function in python that we want to use, is not inclusive of the upper limit.
 
 Instead of using a list, though, we're going to try to use a set.  The reason for this is that sets have a special function that will allow us to eliminate non-primes quickly during our search, and massively speed it up. We are going to look at how fast we can calculate our primes, so we'll use the time library. 
 
-```ruby
-range_limit = primes_limit+1
-numbers_to_check = set(range(2, range_limit))
-```
-
 We also need a place where we can store any primes we discover.  A list will be fine for this job.
 
 ```ruby
+primes_limit = 20
+range_limit = primes_limit+1
+numbers_to_check = set(range(2, range_limit))
 primes_list = []
 ```
 
 We're going to use a while loop to iterate through our set and check for primes, but before we construct that I find it can be valuable to think through the logic first.  
 
+>Capture the primes limit that we are going to check up to.  
+>  
+>Create a list of numbers to check, between 2 and the primes limit, inclusively.  
+>  
+>while we still have numbers remaining in our list:  
+>    find the lowest number.  This will be a prime.  
+>    Add the prime to our found primes list.  
+>    remove the prime from the numbers to check list.  
+>    find all the multiples of our prime between the prime and the primes limit we are checking up to.  
+>    remove all these multiples of our prime from the remaining numbers to check list.  They are definitely not primes, since they have  >  >    our prime as a factor.  
+>    Repeat until we have no more numbers in our remaining list.  
+>  
+>Calculate summary data.  
+>Return the list of primes found to the caller.  
+
 So, we have our set of numbers (called numbers_to_check to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it.
 
 There is a method which will remove an element from a list or set and provide that value to us, and that method is called *pop*
 
-```ruby
-print(numbers_to_check)
->>> {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
-```
 If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **numbers_to_check**, and into **prime**
 
+Let's see this part working.
 ```ruby
+# First lets take a look what's in our numbers to check set
+print(numbers_to_check)
+>>> {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+
+# Now let's call pop() on the set and see what we get - Yay! we got the 2, which is a prime.
 prime = numbers_to_check.pop()
 print(prime)
 >>> 2
+
+# and just to be sure, let's see what we are left with in the set.
 print(numbers_to_check)
 >>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 ```
 
 Now, we know that the very first value in our range is going to be a prime, as there is nothing smaller than it so therefore nothing else could possible divide evenly into it.  As we know it's a prime, let's add it to our list of primes.
 
-```ruby
-primes_list.append(prime)
-print(primes_list)
->>> [2]
-```
+Now we're going to use some set functionality to check our remaining numbers_to_check for non-primes, based on the prime we just found. For our prime number (in this first case it was the number 2) we want to generate a set of all the multiples of that up to our upper range (in our case, 20).
 
-Now we're going to do a special trick using set functionality to check our remaining numbers_to_check for non-primes. For the prime number we just checked (in this first case it was the number 2) we want to generate all the multiples of that up to our upper range (in our case, 20).
-
-We're going to use a set rather than a list, because it allows us some special functionality that we'll use in a minute, which is the magic of this approach.
+This is the reason we are using a set rather than a list, because it allows us some special functionality that we'll use in a minute, to quickly eliminate non primes from our set of numbers to check, and which is essential to the magic of this approach.
 
 ```ruby
 multiples = set(range(prime*2, primes_limit+1, prime))
@@ -142,19 +132,21 @@ The next part is the magic I spoke about earlier, we're using the special set fu
 
 Before we apply the **difference_update**, let's look at our two sets.
 
-```ruby
-print(numbers_to_check)
->>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
-
-print(multiples)
->>> {4, 6, 8, 10, 12, 14, 16, 18, 20}
-```
-
 **difference_update** works in a way that will update one set to only include the values that are *different* from those in a second set
 
 To use this, we put our initial set and then apply the difference update with our multiples:
 
 ```ruby
+# lets see what's in our set to start with.
+print(numbers_to_check)
+>>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
+
+# let's have a look at the multiples of our prime -- 2 -- that we found previously
+print(multiples)
+>>> {4, 6, 8, 10, 12, 14, 16, 18, 20}
+
+# Now, we sprinkle on some fairy dust, and apply our magic difference_update method.  And look, our list of numbers to check has been 
+# reduced!  All the multiples of our prime have been removed.  This is going to speed our job up a lot!
 numbers_to_check.difference_update(multiples)
 print(numbers_to_check)
 >>> {3, 5, 7, 9, 11, 13, 15, 17, 19}
