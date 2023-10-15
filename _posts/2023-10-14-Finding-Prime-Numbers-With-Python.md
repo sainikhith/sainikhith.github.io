@@ -33,16 +33,6 @@ Some key things about prime numbers:
 
 So in simple terms, a prime number is a lone wolf - it can't be evenly split into smaller whole number groups. It's only divisible by itself and 1. This makes primes the atoms of the math world. 
 
----
-#### random dad joke alert
-
-```ruby
-# Q. What do prime numbers and stoners have in common?  
-
-# A. They get more spaced out the higher they get...
-```
-
-
 Ok, Let's get into our design.
 
 ---
@@ -73,11 +63,11 @@ Capture the primes limit that we are going to check up to.
 Create a list of numbers to check, between 2 and the primes limit, inclusively.  
 
 while we still have numbers remaining in our list:  
-    find the lowest number.  This will be a prime.  
+    Find the lowest number.  This will be a prime.  
     Add the prime to our found primes list.  
-    remove the prime from the numbers to check list.  
-    find all the multiples of our prime between the prime and the primes limit we are checking up to.  
-    emove all these multiples of our prime from the remaining numbers to check list.  They are definitely not primes, since they have    our prime as a factor.  
+    Remove the prime from the numbers to check list.  
+    Find all the multiples of our prime between the prime and the primes limit we are checking up to.  
+    Remove all these multiples of our prime from the remaining numbers to check list.  They are definitely not primes, since they have    our prime as a factor.  
     Repeat until we have no more numbers in our remaining list.  
   
 Calculate summary data.  
@@ -252,13 +242,13 @@ find_primes_under(1000000)
 >>> The calculation took 0.3613283634185791 seconds.
 ```
 
-That is pretty cool, and super quick!  We are very excited and proud of our solution!
+That is pretty cool, and super quick!  We are very excited and proud of our solution!  But you know what they say about pride...
 
 ---
-## houston, we have a problem
+## houston, we have a problem!
 But wait!  While this is all working perfectly on my machine, and passing every test I run, we actually have a problem with the python code, and this is a sneaky one that could cause another developer, or future-me, a massive headache!  
 
-*The Symptoms*
+### The Symptoms  
 We have reports that, while most of the time everything works perfectly, occasionally people are getting the wrong results from our function!  Sometimes the list of returned 'Primes' contains the odd rogue number which is not a prime at all! What is going on?
 
 I try, but cannot replicate it on my machine. I run tests, I debug through the code. It's all working great for me!  So to solve this intermittent problem we need to look again at the code in our function, and question our assumptions.  
@@ -267,7 +257,7 @@ I try, but cannot replicate it on my machine. I run tests, I debug through the c
 
 ### using pop() on a set in python
 
-It turns out we have a code smell in our code.  We can't rely on using the pop() method on a Set, to give us the minimum number in the set, because a set in python is un-ordered by definition.  That means, pop() *could* randomly select any value from the set.  In practice, at least on my machine with my setup, it appears to be consistently extracting the lowest element of the set.  However, we cannot rely on this!
+It turns out we have a code-smell in our code.  We can't rely on using the pop() method on a Set, to give us the minimum number in the set, because a set in python is un-ordered by definition.  That means, pop() *could* randomly select any value from the set.  In practice, at least on my machine with my setup, it appears to be consistently extracting the lowest element of the set.  However, we cannot rely on this!
 
 The items are stored internally with some order, but this internal order is determined by the hash code of the key (which is what allows retrieval to be so fast). 
 
@@ -342,7 +332,7 @@ Because now we have to sort the list for each iteration of the loop in order to 
 ## solution version 3
 After further research we find there is such a thing as an OrderedSet in the ordered_set package.  You have to install it with pip install ordered_set before you can use it. Optimistically, we will try this out.
 
-Let's try this and see what happens.  Here is the code:
+Let's see what happens.  Here is the code:
 
 ```ruby
 import time
@@ -394,7 +384,7 @@ The calculation took 7.056451082229614 seconds.
 ```
 
 ## solution version 4
-So, lets go back to the drawing board, and to the Python built in types, and think through the logic again.  There's got to be a simple solution using what we know.
+So, lets go back to the drawing board, and to the Python built-in types, and think through the logic again.  There's got to be a simple solution using what we know.
 
 We want the ordered nature of a list, and we want to be able to quickly eliminate multiples of our primes using the set functionality.  So, let's try using both types, and use the right tool for each job.
 
@@ -468,7 +458,16 @@ It's also a little bit harder to understand for future maintenance developers (o
 
 But you can't always have everything in software, and sometimes "good enough" has to be good enough.  
 
-I hope you've enjoyed this little exploration into Python and Prime Numbers as much as I did, despite all the creepy crawly references in the Python development tools I'm usring.  I now have Anacondas and Spyders crawling around on my machine!
+I hope you've enjoyed this little exploration into Python and Prime Numbers as much as I did, despite all the creepy crawly references in the Python development tools I'm using.  I now have Anacondas and Spyders crawling around on my machine!
+
+---
+#### random dad joke alert
+
+```ruby
+# Q. What do prime numbers and stoners have in common?  
+
+# A. They get more spaced out the higher they get...
+```
 
 >Final Note:  
 >If you were wondering why the language was named Python, it was apparently because it's creator, Guido van Rossum, was a big fanboy of 
