@@ -51,22 +51,22 @@ First we define what we are trying to achieve.
 
 We want to create a function that answers the question "what are all the primes up to a certain number, specified by the  caller.", that returns a list of the prime numbers to the user.  We also want this to happen as quickly as we can.
 
->>>
-Capture the primes limit that we are going to check up to.
 
-Create a list of numbers to check, between 2 and the primes limit, inclusively.
+>Capture the primes limit that we are going to check up to.
+>
+>Create a list of numbers to check, between 2 and the primes limit, inclusively.
+>
+>while we still have numbers remaining in our list:
+>    find the lowest number.  This will be a prime.
+>    Add the prime to our found primes list.
+>    remove the prime from the numbers to check list.
+>    find all the multiples of our prime between the prime and the primes limit we are checking up to.
+>    remove all these multiples of our prime from the remaining numbers to check list.  They are definitely not primes, since they have our >    prime as a factor.
+>    Repeat until we have no more numbers in our remaining list.
+>
+>Calculate summary data.
+>Return the list of primes found to the caller.
 
-while we still have numbers remaining in our list:
-    find the lowest number.  This will be a prime.
-    Add the prime to our found primes list.
-    remove the prime from the numbers to check list.
-    find all the multiples of our prime between the prime and the primes limit we are checking up to.
-    remove all these multiples of our prime from the remaining numbers to check list.  They are definitely not primes, since they have our prime as a factor.
-    Repeat until we have no more numbers in our remaining list.
-
-Calculate summary data.
-Return the list of primes found to the caller.
->>>
 
 Now, let's think about the variables and data types we want to use in our function.  We need to start with an integer to hold the limit we are checking up to, that will be passed into the function.  Let's call that primes_limit.
 
@@ -467,14 +467,16 @@ The largest prime is 999983.
 The calculation took 120.53264737129211 seconds.
 ```
 ## conclusion
-Ok, I think that's probably as good as it's going to get, for tonight at least!  100,000 primes in just under a second, and a million primes in 2 minutes, and no unreliable behaviour!
+Ok, I think that's probably as good as it's going to get, for tonight at least!  100,000 checked for primes in just under a second, and a million in 2 minutes, and no unreliable behaviour!
 
-A million primes is still a bit slow at a couple of minutes! and it's nothing like the sub-second performance results of our original code where were just popping off the set each time and hoping it would pick the right one.  But you can't have everything in software, and sometimes "good enough" has to be good enough.  
+Checking up to a million for primes in a couple of minutes is still a bit slow! and it's nothing like the sub-second performance results of our original code where were just popping off the set each time and hoping it would pick the right one.  
 
-I hope you've enjoyed this little exploration into Python as much as I did, despite all the creepy crawly references in the development tools.  I now have Anacondas and Spyders crawling around on my machine!
+It's also a little bit harder to understand for future maintenance developers (or future-me) because we're using 2 different data types for the purpose of tracking the numbers remaining to be checked.  We would have to leave some explanatory comments in this code to explain this seemingly bizzarre design decision.
 
->>>
-Final Note:  
-If you were wondering why the language was named Python, it was allegedly because it's creator, Guido van Rossum, was a big fanboy of 
-Monty Python's Flying Circus.
->>>
+But you can't always have everything in software, and sometimes "good enough" has to be good enough.  
+
+I hope you've enjoyed this little exploration into Python and Prime Numbers as much as I did, despite all the creepy crawly references in the Python development tools I'm usring.  I now have Anacondas and Spyders crawling around on my machine!
+
+>Final Note:  
+>If you were wondering why the language was named Python, it was apparently because it's creator, Guido van Rossum, was a big fanboy of 
+>Monty Python's Flying Circus.
