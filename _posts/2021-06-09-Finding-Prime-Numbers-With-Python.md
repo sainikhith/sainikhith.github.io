@@ -53,7 +53,7 @@ First let's think about the variables and data types we want to use.  We need to
 primes_limit = 20
 ```
 
-We know the smallest true Prime number is 2.  We now need a list of all numbers that we need to check.  So, we can find every integer between 2 and our upper bound which in this case was 20. We use *primes_limit + 1* as the range logic we want to use for this is not inclusive of the upper limit.
+We know the smallest true Prime number is 2.  We now need a list of all numbers that we need to check which will be every integer between 2 and our upper bound which in this case was 20. We use *primes_limit + 1* as the range logic we want to use for this is not inclusive of the upper limit.
 
 Instead of using a list, though, we're going to try to use a set.  The reason for this is that sets have some special functions that will allow us to eliminate non-primes during our search, and massively speed it up. We are going to look at how fast we can calculate our primes. 
 
@@ -251,7 +251,7 @@ I try, but cannot replicate it on my machine. I run tests, I debug through the c
 
 ---
 
-### Using pop() on a Set in Python
+### using pop() on a set in python
 
 In the real world - we can't rely on using the pop() method on a Set because pop() will simply take the first item in the set, and a set in python is un-ordered by definition.  That means, pop() could randomly select any value from the set.  In practice, at least on my machine with my setup, it is usually extracting the lowest element of the set.  However, we cannot rely on this.  
 
@@ -275,7 +275,7 @@ prime = numbers_to_check.pop()
 prime = min(sorted(numbers_to_check))
 numbers_to_check.remove(prime)
 ```
-
+## solution version 2
 Here is the new function:
 
 ```ruby
@@ -328,6 +328,7 @@ The calculation took 5.072026491165161 seconds.
 
 However, because we have to sort the list for each iteration of the loop in order to get the minimum value, it's a lot slower than what we saw with pop()!
 
+## solution version 3
 After further research we find there is such a thing as an OrderedSet in the ordered_set package.  You have to install it with pip install ordered_set before you can use it. 
 
 Let's try this and see what happens.  Here is the code:
@@ -381,6 +382,7 @@ The largest prime is 99991.
 The calculation took 7.056451082229614 seconds.
 ```
 
+## solution version 4
 So, lets go back to the drawing board, and to the simple built in types, and think through the logic again.  There's got to be a simple solution using what we know.
 
 We want the ordered nature of a list, and we want to be able to quickly eliminate multiples of our primes using the set functionality.  So, let's try using both types, and use the right tool for each job.
