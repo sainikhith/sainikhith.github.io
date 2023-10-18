@@ -52,7 +52,7 @@ We also need a place where we can store any primes we discover.  A list will be 
 ```ruby
 primes_limit = 20
 range_limit = primes_limit+1
-numbers_to_check = set(range(2, range_limit))
+prime_suspects = set(range(2, range_limit))
 primes_list = []
 ```
 
@@ -74,31 +74,31 @@ Calculate summary data.
 Return the list of primes found to the caller.  
 ```
 
-So, we have our set of numbers (called numbers_to_check to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it.
+So, we have our set of numbers (called prime_suspects to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it.
 
 There is a method which will remove an element from a list or set and provide that value to us, and that method is called *pop*
 
-If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **numbers_to_check**, and into **prime**
+If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **prime_suspects**, and into **prime**
 
 Let's see this part working.
 ```ruby
 # First lets take a look what's in our numbers to check set
-print(numbers_to_check)
+print(prime_suspects)
 >>> {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 
 # Now let's call pop() on the set and see what we get - Yay! we got the 2, which is a prime.
-prime = numbers_to_check.pop()
+prime = prime_suspects.pop()
 print(prime)
 >>> 2
 
 # and just to be sure, let's see what we are left with in the set.
-print(numbers_to_check)
+print(prime_suspects)
 >>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 ```
 
-Now, we know that the very first value in our range is going to be a prime, as there is nothing smaller than it so therefore nothing else could possible divide evenly into it.  As we know it's a prime, let's add it to our list of primes.
+Now, we know that the very first value in our range is going to be a prime, as there is nothing smaller than it so therefore nothing else could possibly divide evenly into it.  As we know it's a prime, let's add it to our list of primes.
 
-Now we're going to use some set functionality to check our remaining numbers_to_check for non-primes, based on the prime we just found. For our prime number (in this first case it was the number 2) we want to generate a set of all the multiples of that up to our upper range (in our case, 20).
+Now we're going to use some set functionality to check our remaining prime_suspects for non-primes, based on the prime we just found. For our prime number (in this first case it was the number 2) we want to generate a set of all the multiples of that up to our upper range (in our case, 20).
 
 This is the reason we are using a set rather than a list, because it allows us some special functionality that we'll use in a minute, to quickly eliminate non primes from our set of numbers to check, and which is essential to the magic of this approach.
 
@@ -129,7 +129,7 @@ To use this, we put our initial set and then apply the difference update with ou
 
 ```ruby
 # lets see what's in our set to start with.
-print(numbers_to_check)
+print(prime_suspects)
 >>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
 
 # let's have a look at the multiples of our prime -- 2 -- that we found previously
@@ -138,8 +138,8 @@ print(multiples)
 
 # Now, we sprinkle on some fairy dust, and apply our magic difference_update method.  And look, our list of numbers to check has been 
 # reduced!  All the multiples of our prime have been removed.  This is going to speed our job up a lot!
-numbers_to_check.difference_update(multiples)
-print(numbers_to_check)
+prime_suspects.difference_update(multiples)
+print(prime_suspects)
 >>> {3, 5, 7, 9, 11, 13, 15, 17, 19}
 ```
 
@@ -162,21 +162,21 @@ def find_primes_under(primes_limit=20):
     range_limit = primes_limit+1
 
     # number range to be checked, between 2, which we know is the first true prime, and the limit requested.
-    numbers_to_check = set(range(2, range_limit))
+    prime_suspects = set(range(2, range_limit))
 
     # primes that we have found go in here.
     primes_list = []
 
-    # while there are still numbers left in the numbers_to_check set, we go round the loop
-    while numbers_to_check:
+    # while there are still numbers left in the prime_suspects set, we go round the loop
+    while prime_suspects:
         # we know the lowest number from the numbers to check set is a prime
-        prime = numbers_to_check.pop()
+        prime = prime_suspects.pop()
         primes_list.append(prime)
 
         # range(start, stop, step) - we use this nice feature to find multiples of our prime
         # and remove them from our set of numbers remaining to check
         multiples = set(range(prime*2, range_limit, prime))
-        numbers_to_check.difference_update(multiples)
+        prime_suspects.difference_update(multiples)
 
     # We calculate some summary details to report, before returning the list of primes that we found.
     # We also report the time the calculation took.
@@ -270,14 +270,14 @@ These include the *min()* and *max()* functions in Python, and this I feel is ev
 The simplest solution to force the minimum value to be used is to replace the line...
 
 ```ruby
-prime = numbers_to_check.pop()
+prime = prime_suspects.pop()
 ```
 
 ...with the lines...
 
 ```ruby
-prime = min(sorted(numbers_to_check))
-numbers_to_check.remove(prime)
+prime = min(sorted(prime_suspects))
+prime_suspects.remove(prime)
 ```
 ## solution version 2
 Here is the new function, where we sort the set data before finding the minimum value and removing it from the set:
@@ -289,24 +289,24 @@ def find_primes_under(primes_limit=20):
     range_limit = primes_limit + 1
 
     # number range to be checked
-    numbers_to_check = set(range(2, range_limit))
+    prime_suspects = set(range(2, range_limit))
 
     # primes that we have found
     primes_list = []
 
-    # while there are still items in the numbers_to_check set
-    while numbers_to_cnumbers_to_checkheck_set:
+    # while there are still items in the prime_suspects set
+    while prime_suspects:
         # we know the lowest number from the numbers to check set is a prime
         # even though we can call min on a set, we need to sort it first before it will reliably give us the minimum!!!
-        prime = min(sorted(numbers_to_check))
-        numbers_to_check.remove(prime)
+        prime = min(sorted(prime_suspects))
+        prime_suspects.remove(prime)
         primes_list.append(prime)
 
         # range(start, stop, step) - we use this to find multiples of our prime
         multiples = set(range(prime*2, range_limit, prime))
 
         # here we remove them from our set of numbers remaining to check
-        numbers_to_check.difference_update(multiples)
+        prime_suspects.difference_update(multiples)
 
     prime_count = len(primes_list)
     largest_prime = max(primes_list)
@@ -344,22 +344,22 @@ def find_primes_under(primes_limit=20):
     range_limit = primes_limit + 1
 
     # number range to be checked
-    numbers_to_check = OrderedSet(range(2, range_limit))
+    prime_suspects = OrderedSet(range(2, range_limit))
 
     # primes that we have found
     primes_list = []
 
-    # while there are still items in the numbers_to_check set
-    while numbers_to_check:
+    # while there are still items in the prime_suspects set
+    while prime_suspects:
         # Using an ordered set we should be able to pop them.
-        prime = numbers_to_check.pop(0)
+        prime = prime_suspects.pop(0)
         primes_list.append(prime)
 
         # range(start, stop, step) - we use this to find multiples of our prime
         multiples = set(range(prime*2, range_limit, prime))
 
         # here we remove them from our set of numbers remaining to check
-        numbers_to_check.difference_update(multiples)
+        prime_suspects.difference_update(multiples)
 
     prime_count = len(primes_list)
     largest_prime = max(primes_list)
@@ -398,31 +398,31 @@ def find_primes_under(primes_limit=20):
 
     # number range to be checked - we need both a list and a set for
     # this experiment
-    numbers_to_check_list = list(range(2, range_limit))
-    numbers_to_check_excluding_multiples_set = set(numbers_to_check_list)
+    prime_suspects_list = list(range(2, range_limit))
+    prime_suspects_excluding_multiples_set = set(prime_suspects_list)
 
     # primes that we have found
     primes_list = []
 
-    # while there are still items in the numbers_to_check set
-    while numbers_to_check_excluding_multiples_set:
+    # while there are still items in the prime_suspects set
+    while prime_suspects_excluding_multiples_set:
         # we know the lowest number from the numbers to check set is a prime
         # so we pop the first number from the list, and then check if we
         # have eliminated it from our set check
-        prime = numbers_to_check_list.pop(0)
-        if prime not in numbers_to_check_excluding_multiples_set:
+        prime = prime_suspects_list.pop(0)
+        if prime not in prime_suspects_excluding_multiples_set:
             # we don't need to check this, it's been excluded already
             continue
         else:
             primes_list.append(prime)
-            numbers_to_check_excluding_multiples_set.remove(prime)
+            prime_suspects_excluding_multiples_set.remove(prime)
 
         # range(start, stop, step) - we use this to find multiples of our prime
         # within the specified range
         multiples = set(range(prime*2, range_limit, prime))
 
         # here we remove them from our set of numbers remaining to check
-        numbers_to_check_excluding_multiples_set.difference_update(multiples)
+        prime_suspects_excluding_multiples_set.difference_update(multiples)
 
     prime_count = len(primes_list)
     largest_prime = max(primes_list)
@@ -509,8 +509,7 @@ def find_primes_under(primes_limit=20):
         if len(multiples) > 0:
             prime_suspects.difference_update(multiples)
 
-    # once we have eliminated the impossible, all that remains, however
-    # improbable, must be a prime.
+    # once we have eliminated the impossible, all that remains, however improbable, must be a prime.
     prime_count = len(prime_suspects)
     largest_prime = max(prime_suspects)
     end = time.time()
@@ -519,7 +518,7 @@ def find_primes_under(primes_limit=20):
     print(f"The largest prime is {largest_prime}.")
     print(f"The calculation took {end - start} seconds.")
 
-    return numbers_to_check
+    return prime_suspects
 ```
 
 And the performance is pretty acceptable too!
