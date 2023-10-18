@@ -11,7 +11,7 @@ In this post I'm going to run through creating a function in Python that can qui
 I've created this project to demonstrate the use of some basic Python functionality in a simple mathematical problem.  There are a few good reasons for using Python to solve mathematical problems like this:  
 
 * Python has simple and clean syntax that makes it easy to write and understand code. This is important for a maths-heavy algorithm like prime number calculation.
-* It has built-in big number support through the 'decimal' module, which allows me to work with large numbers without worry of overflow. This is crucial for prime calculations.
+* It has built-in big number support through the 'decimal' module, which allows me to work with large numbers without worry of overflow. This is crucial for large prime calculations.
 * Python has libraries that provide highly optimised functions and data structures for numerical computing, which can really speed up the processing.
 * It's easy to write Python code in a functional style, with higher-order functions like 'filter', 'map', etc. This lends itself well to a prime checking algorithm.
 * Python code can be written and tested interactively using the REPL. That would allow me to prototype and debug each part of the algorithm easily.
@@ -21,7 +21,7 @@ Of course, many other languages like C, C++, R, Rust, Julia etc would also work.
 
 ---
 ### what is a prime number?
-A prime number is a whole number greater than 1 that can only be divided evenly by 1 and itself. By evenly, I mean to produce a whole number. For example, 5 is a prime number because it can only be divided evenly by 1 and 5. It cannot be divided evenly by any other whole numbers.
+A prime number is a whole number greater than 1 that can only be divided evenly by 1 and itself. By evenly, I mean to produce a whole number. For example, 5 is a prime number because it can only be divided evenly by 1 and 5. It cannot be divided evenly by any other whole numbers to produce a whole number.
 
 Some key things about prime numbers:
 
@@ -31,7 +31,7 @@ Some key things about prime numbers:
 * Prime numbers get more spread out as the numbers get larger. For small numbers there are lots of primes, but for very big numbers you have to look farther to find the next prime.
 * Prime numbers are important in many areas of maths and encryption. But at a basic level, they are just numbers that can only be evenly divided by themselves and 1.
 
-So in simple terms, a prime number is a lone wolf - it can't be evenly split into smaller whole number groups. It's only divisible by itself and 1. This makes primes the atoms of the math world. 
+So in simple terms, a prime number is a lone wolf - it can't be evenly split into smaller whole number groups. It's only divisible by itself and 1. This makes primes the atoms of the mathematics world. 
 
 Ok, Let's get into our design.
 
@@ -56,7 +56,7 @@ numbers_to_check = set(range(2, range_limit))
 primes_list = []
 ```
 
-We're going to use a while loop to iterate through our set and check for primes, but before we construct that I find it can be valuable to think through the logic first.  
+We're going to use a while loop to iterate through our set and check for primes, but before we construct that I find it can be valuable to think through the logic first.  Here is some pseudo-code for that.
 
 ```ruby
 Capture the primes limit that we are going to check up to.  
@@ -257,7 +257,7 @@ I try, but cannot replicate it on my machine. I run tests, I debug through the c
 
 ### using pop() on a set in python
 
-It turns out we have a code-smell in our code.  We can't rely on using the pop() method on a Set, to give us the minimum number in the set, because a set in python is un-ordered by definition.  That means, pop() *could* randomly select any value from the set.  In practice, at least on my machine with my setup, it appears to be consistently extracting the lowest element of the set.  However, we cannot rely on this!
+It turns out we have a code-smell in our code.  We can't rely on using the pop() method on a set to give us the minimum number, because a set in python is un-ordered by definition.  That means, pop() *could* randomly select any value from the set.  In practice, at least on my machine with my setup, it appears to be consistently extracting the lowest element of the set.  However, we cannot rely on this!
 
 The items are stored internally with some order, but this internal order is determined by the hash code of the key (which is what allows retrieval to be so fast). 
 
@@ -472,3 +472,83 @@ I hope you've enjoyed this little exploration into Python and Prime Numbers as m
 >Final Note:  
 >If you were wondering why the language was named Python, it was apparently because it's creator, Guido van Rossum, was a big fanboy of 
 >Monty Python's Flying Circus.
+
+## postscript addded 18/10/2023  - solution version 5
+Of course, software engineers sometimes get inspiration after ignoring a problem for a while.  Especially when we're not entirely happy with the solution!  Here is a much better and more performant solution that I am much happier with.
+
+```ruby
+import time
+def find_primes_under(primes_limit=20):
+    start = time.time()
+
+    # upper bound
+    # we add 1 because the range function is exclusive of the upper limit, and we want to include it.
+    range_limit = primes_limit + 1 
+
+    # number range to be checked.  After 2 we know we don't need any even numbers, so lets keep our set down.
+    prime_suspects = set()
+    prime_suspects.add(2)  # we'll start with 2
+    prime_suspects.update(set(range(3, range_limit, 2))) # and then add all the odd numbers after that up to our limit.
+
+    # we don't need to check multiples beyond the half way mark to our limit, there won't be
+    # any multiples in the range after that, they won't fit!
+    # so let's cut down our work a bit more.
+    # Also, after 2, we only need to check odd numbers for multiples
+    # as we have already eliminated the even numbers after 2 before we started,
+    # so we'll start multiple checking odd numbers @ 3 and use the range step to pick out odd numbers.
+    multiples_to_check_list = list(range(3, int(range_limit / 2), 2))
+
+    # We eliminate multiples of our list from the set.  
+    # this is also clearer in terms of what the variable responsibilites are.  
+    # Our list is a list of multiples to eliminate from our set, and we use it with a for loop
+    # our set is a set of prime suspects, and when we're done we will have only the primes left in here.
+    for i in multiples_to_check_list:
+        multiples = set(range(i*2, range_limit, i))
+
+        # here we remove the multiples from our set of numbers remaining to check
+        if len(multiples) > 0:
+            prime_suspects.difference_update(multiples)
+
+    # once we have eliminated the impossible, all that remains, however
+    # improbable, must be a prime.
+    prime_count = len(prime_suspects)
+    largest_prime = max(prime_suspects)
+    end = time.time()
+    print(
+        f"There are {prime_count} prime numbers between 0 and {primes_limit}.")
+    print(f"The largest prime is {largest_prime}.")
+    print(f"The calculation took {end - start} seconds.")
+
+    return numbers_to_check
+```
+
+And the performance is pretty acceptable too!
+
+```ruby
+primes = find_primes_under()
+print(primes)
+
+>>> There are 8 prime numbers between 0 and 20.
+>>> The largest prime is 19.
+>>> The calculation took 0.0 seconds.
+>>> {2, 3, 5, 7, 11, 13, 17, 19}
+
+# for primes under a hundred thousand...
+primes = find_primes_under(100000)
+
+>>> primes = find_primes_under(100000)
+>>> There are 9592 prime numbers between 0 and 100000.
+>>> The largest prime is 99991.
+>>> The calculation took 0.04669761657714844 seconds.
+
+# and for all primes under a million!
+primes = find_primes_under(1000000)
+
+>>> There are 78498 prime numbers between 0 and 1000000.
+>>> The largest prime is 999983.
+>>> The calculation took 0.5169754028320312 seconds.
+```
+
+Oh yes.  All primes under a million, in half a second! and only using basic python functionality.  That will do.
+
+That's all folks!
