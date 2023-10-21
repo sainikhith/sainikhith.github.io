@@ -78,7 +78,7 @@ Let's see what happens!
 ```
 Wow! here are all our planets with their volumes, calculated in a tiny fraction of a second, so small we couldn't even measure it.  That's really quite cool.
 
-| Planet | Radius (km) | Volume (km^2) | 
+| Planet | Radius (km) | Volume (km<sup>2</sup>) | 
 |:---|---:|---:|
 | Mercury | 2439.7 | 6.08272087e+10 |
 | Venus | 6051.8 | 9.28415346e+11 |
