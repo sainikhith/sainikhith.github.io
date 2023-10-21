@@ -9,7 +9,7 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: Helen Abell
-description: "Hi, I'm Helen. I'm a Software Engineer and Data Scientist open to contract work.  This portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact. Please visit my Github & LinkedIn pages (or download my CV) by using the links below."
+description: "Hi, I'm Helen. I'm a Software Engineer and Data Science enthusiast.  This portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact. Please visit my Github & LinkedIn pages (or download my CV) by using the links below."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
