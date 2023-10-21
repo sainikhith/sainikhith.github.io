@@ -475,17 +475,19 @@ def find_primes_under(primes_limit=20):
     # we add 1 because the range function is exclusive of the upper limit, and we want to include it.
     range_limit = primes_limit + 1 
 
-    # number range to be checked.  After 2 we know we don't need any even numbers, so lets keep our set down.
+    # prime_suspects to be checked.  After 2 we know we don't need any even numbers, so lets keep our set down.
     prime_suspects = set()
     prime_suspects.add(2)  # we'll start with 2
     prime_suspects.update(set(range(3, range_limit, 2))) # and then add all the odd numbers after that up to our limit.
 
-    # we don't need to check multiples beyond the half way mark to our limit, there won't be
-    # any multiples in the range after that, they won't fit!
-    # so let's cut down our work a bit more.
-    # Also, after 2, we only need to check odd numbers for multiples
-    # as we have already eliminated the even numbers after 2 before we started,
-    # so we'll start multiple checking odd numbers @ 3 and use the range step to pick out odd numbers.
+    # Multiple Elimination.  
+    # We find multiples of these  numbers, and eliminate them from the prime_suspects set because they can't be prime.
+    # we don't need to check multiples bigger than the half way mark to our limit, there won't be any multiples in the range 
+    # after that, they won't fit!
+    # so let's cut down our work a bit more, and only check up to the half way point.
+    # Also, after 2, we only need to check odd numbers for multiples,
+    # as we have already eliminated the even numbers after 2 before we started, so we'll ditch them now too.
+    # so we'll just check odd numbers starting @ 3, up to half our limit, using the range step 2 to pick out odd numbers.
     multiples_to_check_list = list(range(3, int(range_limit / 2), 2))
 
     # We eliminate multiples of our list from the set.  
