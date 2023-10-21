@@ -440,7 +440,7 @@ The largest prime is 999983.
 The calculation took 120.53264737129211 seconds.
 ```
 ## conclusion
-Ok, I think that's probably as good as it's going to get, for tonight at least!  100,000 checked for primes in just under a second, and a million in 2 minutes, and no unreliable behaviour!
+Ok, it's 3 am and I think that's probably as good as it's going to get, for tonight at least!  100,000 checked for primes in just under a second, and a million in 2 minutes, and no unreliable behaviour!
 
 Checking up to a million for primes in a couple of minutes is still a bit slow! and it's nothing like the sub-second performance results of our original code where were just popping off the set each time and hoping it would pick the right one.  
 
@@ -457,11 +457,13 @@ But you can't always have everything in software, and sometimes "good enough" ha
 # A. They get more spaced out the higher they get...
 ```
 
->Final Note:  
+
+>*Final Note*:  
 >If you were wondering why the language was named Python, it was apparently because it's creator, Guido van Rossum, was a big fanboy of 
 >Monty Python's Flying Circus.
 
-## postscript addded 18/10/2023  - solution version 5
+---
+## postscript added 18/10/2023  - solution version 5
 Of course, software engineers sometimes get inspiration after ignoring a problem for a while.  Especially when we're not entirely happy with the solution!  Here is a much better and more performant solution that I am much happier with.
 
 ```ruby
