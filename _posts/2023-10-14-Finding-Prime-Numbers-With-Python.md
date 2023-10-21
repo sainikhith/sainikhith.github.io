@@ -10,53 +10,43 @@ In this post I'm going to run through creating a function in Python that can qui
 
 I've created this project to demonstrate the use of some basic Python functionality in a simple mathematical problem.  There are a few good reasons for using Python to solve mathematical problems like this:  
 
-* Python has simple and clean syntax that makes it easy to write and understand code. This is important for a maths-heavy algorithm like prime number calculation.
-* It has built-in big number support through the 'decimal' module, which allows me to work with large numbers without worry of overflow. This is crucial for large prime calculations.
-* Python has libraries that provide highly optimised functions and data structures for numerical computing, which can really speed up the processing.
-* It's easy to write Python code in a functional style, with higher-order functions like 'filter', 'map', etc. This lends itself well to a prime checking algorithm.
-* Python code can be written and tested interactively using the REPL. That would allow me to prototype and debug each part of the algorithm easily.
-* Python can later be compiled to native machine code using tools like Cython or Numba if I need to optimize for speed. So I can start simple and optimize later if needed.
+* Python has simple and clean syntax that makes it easy to write and understand code. This is important for a maths-heavy algorithm like prime number calculations.
+* Python has libraries and data types that provide highly optimised functions and data structures for numerical computing.
+* Python code can be written and tested interactively using the REPL*. That would allow me to prototype and debug each part of the algorithm easily.
+* Python can later be compiled to native machine code if I need to optimize for speed. So I can start simple and optimize later if needed.
 
 Of course, many other languages like C, C++, R, Rust, Julia etc would also work. However, I find Python strikes a nice balance between simplicity, available libraries, and performance for this type of maths-focused code. The main thing is using a language that makes the algorithm clear and maintainable.
 
+### Notes
+* - REPL stands for Read Evaluate Print and Loop.  It basically means you can interactively run parts of your python code and see the results, while you're still developing it.  You don't have to finish it and fix all the syntax errors so it compiles before you can see if you have a problem with your approach.  This was a new concept for me, but I like it.
+
 ---
 ### what is a prime number?
-A prime number is a whole number greater than 1 that can only be divided evenly by 1 and itself. By evenly, I mean to produce a whole number. For example, 5 is a prime number because it can only be divided evenly by 1 and 5. It cannot be divided evenly by any other whole numbers to produce a whole number.
+A prime number is a whole number greater than 1 that can only be divided evenly by 1 and itself to produce a whole number. For example, 5 is a prime number because it can only be divided evenly by 1 and 5. It cannot be divided evenly by any other whole numbers.
 
 Some key things about prime numbers:
 
 * They have exactly 2 factors - 1 and the number itself. For example, the only factors of 5 are 1 and 5.
-2 is the only even prime number. All other prime numbers are odd.
-* There is no highest prime number. We can keep finding larger and larger prime numbers forever.
+* 2 is the only even prime number. All other prime numbers are odd.
+* There is no highest prime number. We can keep finding larger and larger prime numbers forever.  This was proved by Euclid among others and you can read about it here if you want to.  https://en.wikipedia.org/wiki/Euclid%27s_theorem.  I'm not going to argue with them.
 * Prime numbers get more spread out as the numbers get larger. For small numbers there are lots of primes, but for very big numbers you have to look farther to find the next prime.
 * Prime numbers are important in many areas of maths and encryption. But at a basic level, they are just numbers that can only be evenly divided by themselves and 1.
 
 So in simple terms, a prime number is a lone wolf - it can't be evenly split into smaller whole number groups. It's only divisible by itself and 1. This makes primes the atoms of the mathematics world. 
 
-Ok, Let's get into our design.
-
 ---
-## design
-First we define what we are trying to achieve.
-
+## design version 1
 We want to create a function that answers the question "what are all the primes up to a certain number, specified by the  caller.", that returns a list of the prime numbers to the user.  We also want this to happen as quickly as we can.
 
-Now, let's think about the variables and data types we want to use in our function.  We need to start with an integer to hold the limit we are checking up to, that will be passed into the function.  Let's call that primes_limit.
+We know the smallest true Prime number is 2.  We are going to create a list of all numbers that we need to check, which will be every integer between 2 and our upper bound which in this case was 20. 
 
-We know the smallest true Prime number is 2.  We are going to create a list of all numbers that we need to check, which will be every integer between 2 and our upper bound which in this case was 20. We use *primes_limit + 1* as the range logic we want to use to define the list of numbers to check, because the upper bound parameter of the range function in python that we want to use, is not inclusive of the upper limit.
+Instead of using a list in Python, though, we're going to try to use a set.  The python set datatype has a lot of functions that support set theory mathematics.  It includes support for operations on sets such as intersections, unions and differences.  Using sets will allow us to eliminate non-primes quickly during our search, and massively speed it up. We are going to look at how fast we can calculate our primes, so we'll use the time library to time our function. 
 
-Instead of using a list, though, we're going to try to use a set.  The reason for this is that sets have a special function that will allow us to eliminate non-primes quickly during our search, and massively speed it up. We are going to look at how fast we can calculate our primes, so we'll use the time library. 
+We will return any primes we discover from our function.
 
-We also need a place where we can store any primes we discover.  A list will be fine for this job.
+---
 
-```ruby
-primes_limit = 20
-range_limit = primes_limit+1
-prime_suspects = set(range(2, range_limit))
-primes_list = []
-```
-
-We're going to use a while loop to iterate through our set and check for primes, but before we construct that I find it can be valuable to think through the logic first.  Here is some pseudo-code for that.
+We're going to use a loop to iterate through our set and check for primes, but before we construct that I find it can be valuable to think through the logic first.  Here is some pseudo-code for that.
 
 ```ruby
 Capture the primes limit that we are going to check up to.  
@@ -74,13 +64,13 @@ Calculate summary data.
 Return the list of primes found to the caller.  
 ```
 
-So, we have our set of numbers (called prime_suspects to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it.
+We start with a set of numbers (lets call them prime_suspects) to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it.
 
 There is a method which will remove an element from a list or set and provide that value to us, and that method is called *pop*
 
 If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **prime_suspects**, and into **prime**
 
-Let's see this part working.
+Let's use the REPL and see this part working.
 ```ruby
 # First lets take a look what's in our numbers to check set
 print(prime_suspects)
@@ -550,4 +540,6 @@ primes = find_primes_under(1000000)
 
 Oh yes.  All primes under a million, in half a second! and only using basic python functionality.  That will do.
 
-That's all folks!
+Thanks for reading.
+
+
