@@ -1,12 +1,12 @@
 ---
 layout: post
 title: Calculating Planet Volumes with Python and Numpy
-image: "/posts/planets.jpeg"
+image: "/posts/planets.jpg"
 tags: [Python, Numpy, Planets]
 ---
 
 ## introduction
-In this post I'm going to explore creating a function in Python and Numpy that can quickly calculating all the planet volumes in the solar system.  If that works out, I'll try to see how fast it can calculate the volumes of a million fictional planets!
+In this post I'm going to explore using Python and Numpy to quickly calculate all the planet volumes in the solar system!  If that works out, I'll try to see how fast it can calculate the volumes of a million fictional planets!
 
 I've created this project to start to explore the use of the Numpy package within Python.  Numpy is a Python library for working with numerical and mathematical data. Here are some key things to know about Numpy:
 
@@ -16,11 +16,11 @@ I've created this project to start to explore the use of the Numpy package withi
 * Numpy provides powerful indexing and slicing capabilities for accessing and modifying array data. You can slice Numpy arrays much like Python lists, but assignments also work in-place for fast operations.
 * Numpy integrates well with other scientific Python libraries like SciPy, Matplotlib, Pandas, and Scikit-Learn, making it a core foundation for many data science and scientific applications in Python.  We will probably look at some of these in future posts.
 
-So in summary, Numpy is the core library for numerical data and high-performance multi-dimensional array computing in Python. It provides key data structures, array operations, and integrates with other libraries. Numpy is a fundamental package for scientific computing, data analysis, and machine learning in Python.  I'm only really scratching the surface of what Numpy can do here, but you have to start somewhere, right. 
+So in summary, Numpy is the core library for numerical data and high-performance multi-dimensional array computing in Python. It provides key data structures, array operations, and integrates with other libraries. Numpy is a fundamental package for scientific computing, data analysis, and machine learning in Python.  I'm only really scratching the surface of what Numpy can do here, but you have to start somewhere. 
 
 ---
 ### the planets of the solar system
-This is a pretty simple mathematical problem to calculate the volume of a planet if you know the radius, but the reason we've chosen it, is that we want to explore how numpy can do a lot of calculations all at once using it's special data structures, and how quickly it can do them. So se start with a quick Google to grab the radii of all our planets. 
+This is a pretty simple mathematical problem to calculate the volume of a planet if you know the radius, but the reason we've chosen it, is that we want to explore how numpy can do a lot of calculations all at once using it's special data structures, and how quickly it can do them. So we start with a quick Google to grab the radii of all our planets. 
 
 | Planet | Radius |  
 |:---|---:|
@@ -34,7 +34,7 @@ This is a pretty simple mathematical problem to calculate the volume of a planet
 | Neptune | 24622 |
 
 ---
-## design version 1
+## design
 We want to use a Numpy array to hold all the radii, so that we can simultaneously calculate the volumes of all the planets at once.  We'll use the time package as well, to see how long the calculation takes, since parts of this package are written in c under the hood, so it should be fast. 
 
 So, we have our calculation formula in python for the volume of a planet.  We're importing the numpy package, and using its handy value for pi (&pi;).  
@@ -52,6 +52,8 @@ We could create a loop and work through an array of radii, to calculate each pla
 
 We'll put a time capture at the start and end of the calculation so we can try and see how fast it is.
 
+---
+## test
 ```ruby
 import numpy as np
 import time
@@ -64,7 +66,7 @@ volumes = 4/3 * np.pi * radii**3
 print(volumes)
 end = time.time()
 print(f"calculated in {end - start} seconds")
-s
+
 ```
 
 Let's see what happens!
@@ -74,7 +76,7 @@ Let's see what happens!
 >>> 1.43128181e+15 8.27129915e+14 6.83343557e+13 6.25257040e+13]
 >>> calculated in 0.0 seconds
 ```
-Wow! That was so fast we couldn't capture it!  Which is good, it was only a small array after all.  Let's give it something a bit more challenging.
+Wow! That was so fast we couldn't even time it!  Which is good, it was only a small array after all.  Let's give it something a bit more challenging.
 
 Let's now try calling the function with a ficticious solar system full of a million planets!
 We'll use the Numpy random function to create a random array of different radii for our fictional planets.
@@ -103,7 +105,7 @@ calculated in 0.004191875457763672 seconds
 length of volumes array is 1,000,000
 
 ```
-Wow! 0.004 seconds. That was pretty quick! And the resulting array really does have a million entries!
+Wow! It just did a million calculations in 0.004 seconds. That was pretty quick! And the resulting array really does have a million entries!
 
 The fact that Numpy arrays have a fixed data type, rather than being able to contain mixed types of objects like Python lists, is one of the reasons it can perform calculations on an entire array virtually simultaneously.  Also, much of the mathematical calculations are done in optiised C code under the hood, and various other languages, with some parts even written in Assembly language.  There is a handy Python API within the Numpy package that allows it to be seamlessly accessed from Python code. 
 
