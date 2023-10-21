@@ -17,8 +17,8 @@ I've created this project to demonstrate the use of some basic Python functional
 
 Of course, many other languages like C, C++, R, Rust, Julia etc would also work. However, I find Python strikes a nice balance between simplicity, available libraries, and performance for this type of maths-focused code. The main thing is using a language that makes the algorithm clear and maintainable.
 
-### Notes
-* - REPL stands for Read Evaluate Print and Loop.  It basically means you can interactively run parts of your python code and see the results, while you're still developing it.  You don't have to finish it and fix all the syntax errors so it compiles before you can see if you have a problem with your approach.  This was a new concept for me, but I like it.
+### notes
+* REPL stands for Read Evaluate Print and Loop.  It basically means you can interactively run parts of your python code and see the results, while you're still developing it.  You don't have to finish it and fix all the syntax errors so it compiles before you can see if you have a problem with your approach.  This was a new concept for me, but I like it.
 
 ---
 ### what is a prime number?
@@ -238,7 +238,7 @@ That is pretty cool, and super quick!  We are very excited and proud of our solu
 ## houston, we have a problem!
 But wait!  While this is all working perfectly on my machine, and passing every test I run, we actually have a problem with the python code, and this is a sneaky one that could cause another developer, or future-me, a massive headache!  
 
-### The Symptoms  
+### the symptoms  
 We have reports that, while most of the time everything works perfectly, occasionally people are getting the wrong results from our function!  Sometimes the list of returned 'Primes' contains the odd rogue number which is not a prime at all! What is going on?
 
 I try, but cannot replicate it on my machine. I run tests, I debug through the code. It's all working great for me!  So to solve this intermittent problem we need to look again at the code in our function, and question our assumptions.  
@@ -448,8 +448,6 @@ It's also a little bit harder to understand for future maintenance developers (o
 
 But you can't always have everything in software, and sometimes "good enough" has to be good enough.  
 
-I hope you've enjoyed this little exploration into Python and Prime Numbers as much as I did, despite all the creepy crawly references in the Python development tools I'm using.  I now have Anacondas and Spyders crawling around on my machine!
-
 ---
 #### random dad joke alert
 
@@ -540,6 +538,4 @@ primes = find_primes_under(1000000)
 
 Oh yes.  All primes under a million, in half a second! and only using basic python functionality.  That will do.
 
-Thanks for reading.
-
-
+I hope you've enjoyed this little exploration into Python and Prime Numbers as much as I did, despite all the creepy crawly references in the Python development tools I'm using.  I now have Anacondas and Spyders crawling around on my machine!
