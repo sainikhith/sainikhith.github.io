@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Calculating Planet Volumes with Python and Numpy
-image: "/posts/planets.jpg"
+image: "/posts/planets.jpeg"
 tags: [Python, Numpy, Planets]
 ---
 
