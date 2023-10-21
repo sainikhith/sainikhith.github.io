@@ -22,7 +22,7 @@ So in summary, Numpy is the core library for numerical data and high-performance
 ### the planets of the solar system
 This is a pretty simple mathematical problem to calculate the volume of a planet if you know the radius, but the reason we've chosen it, is that we want to explore how numpy can do a lot of calculations all at once using it's special data structures, and how quickly it can do them. So we start with a quick Google to grab the radii of all our planets. 
 
-| Planet | Radius |  
+| Planet | Radius (km) |  
 |:---|---:|
 | Mercury | 2439.7 | 
 | Venus | 6051.8 | 
@@ -76,9 +76,24 @@ Let's see what happens!
 >>> 1.43128181e+15 8.27129915e+14 6.83343557e+13 6.25257040e+13]
 >>> calculated in 0.0 seconds
 ```
-Wow! That was so fast we couldn't even time it!  Which is good, it was only a small array after all.  Let's give it something a bit more challenging.
+Wow! here are all our planets with their volumes, calculated in a tiny fraction of a second, so small we couldn't even measure it.  That's really quite cool.
 
-Let's now try calling the function with a ficticious solar system full of a million planets!
+| Planet | Radius (km) | Volume (km^2) | 
+|:---|---:|---:|
+| Mercury | 2439.7 | 6.08272087e+10 |
+| Venus | 6051.8 | 9.28415346e+11 |
+| Earth | 6371 | 1.08320692e+12 |
+| Mars | 3389.7 | 1.63144486e+11 |
+| Jupiter | 69911 | 1.43128181e+15 |
+| Saturn | 58232 | 8.27129915e+14 |
+| Uranus | 25362 | 6.83343557e+13 |
+| Neptune | 24622 | 6.25257040e+13 |
+
+
+
+Let's give it something a bit more challenging.
+
+Let's now try calling the function with a ficticious solar system full of a million randomly sized planets!
 We'll use the Numpy random function to create a random array of different radii for our fictional planets.
 
 ```ruby
