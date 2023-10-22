@@ -37,7 +37,7 @@ This is a pretty simple mathematical problem to calculate the volume of a planet
 ## design
 We want to use a Numpy array to hold all the radii, so that we can simultaneously calculate the volumes of all the planets at once.  We'll use the time package as well, to see how long the calculation takes, since parts of this package are written in c under the hood, so it should be fast. 
 
-So, we have our calculation formula in python for the volume of a planet.  We're importing the numpy package, and using its handy value for pi (&pi;).  
+So, we have our calculation formula in python for the volume of a planet.  We're importing the numpy package, and using it's handy value for pi (&pi;).  
 ```ruby
 import numpy as np
 
@@ -122,7 +122,7 @@ length of volumes array is 1,000,000
 ```
 Wow! It just did a million calculations in 0.004 seconds. That was pretty quick! And the resulting array really does have a million entries!
 
-The fact that Numpy arrays have a fixed data type, rather than being able to contain mixed types of objects like Python lists, is one of the reasons it can perform calculations on an entire array virtually simultaneously.  Also, much of the mathematical calculations are done in optiised C code under the hood, and various other languages, with some parts even written in Assembly language.  There is a handy Python API within the Numpy package that allows it to be seamlessly accessed from Python code. 
+The fact that Numpy arrays have a fixed data type, rather than being able to contain mixed types of objects like Python lists, is one of the reasons it can perform calculations on an entire array virtually simultaneously.  Also, much of the mathematical calculations are done in optimised C code under the hood, and various other languages, with some parts even written in Assembly language.  There is a handy Python API within the Numpy package that allows it to be seamlessly accessed from Python code. 
 
 ---
 #### random dad joke alert
