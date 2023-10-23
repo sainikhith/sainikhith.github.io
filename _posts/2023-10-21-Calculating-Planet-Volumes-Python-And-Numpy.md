@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Calculating Planet Volumes with Python and Numpy
+title: Calculating Planet Volumes with Numpy
 description: In this post I'm going to explore using Python and Numpy to quickly calculate all the planet volumes in the solar system!
 image: "/posts/planets.jpg"
 tags: [Python, Numpy, Planets]
