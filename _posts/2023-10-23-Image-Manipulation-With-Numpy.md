@@ -2,7 +2,7 @@
 layout: post
 title: Image Manipulation with Numpy
 description: In this post I'm going to explore using Python and Numpy to quickly calculate all the planet volumes in the solar system!
-image: "/posts/camaro_rainbow_h.jpg"
+image: "/posts/camaro_rainbow_cropped_h.jpg"
 tags: [Python, Numpy, Images]
 ---
 
@@ -18,7 +18,7 @@ Let's start with our basic image file which is a jpeg file of photograph of a a 
 
 We're going to use the Numpy package for most of our work here, but we need a couple of other packages as well.  We're going to use the skimage package to read in our image, and we're also going to use a package called matplotlib to display our image as we manipulate it.  So, we need to import those.
 
-First thing we need to do is import the jpg image.  For this we will use the skimage io function imread. Then we'll have a look at what we have within python.  
+First thing we need to do is import the jpg image.  For this we will use the skimage io function imread. Then we'll have a look at what we have within Python.  
 
 ```ruby
 import numpy as np
@@ -62,23 +62,28 @@ print(camaro.shape)
 
 >>> (1200, 1600, 3)
 ```
-We see that it has a shape of 1200 x 600 x 3.  
+We see that it has a shape of 1200 x 1600 x 3.  
 
 This is telling us that the image, in the form of a 3D array, 
 
 * has 1200 rows of pixels, 
 * 1600 columns of pixels, 
-* and 3 colour channels, representing red, green and blue intensities.  
+* and 3 colour channels, representing red, green and blue intensities of each pixel.  
 
 So, the image is wider than it is high, and each pixel is represented by its position on the picture (row & column number) and a number representing the intensity of each of the colours: red, green and blue.
 
-So now we understand this, we can use simple maths on the array to play around with the image.  
+So now we understand this data structure, we can use simple maths on the array to play around with the image, and Numpy makes this very easy.  
 
 ---
 
 ## cropping images
 
-Say, we want to crop the image so we just have the car?  We just have to slice the row and column parts of the array to show just the range of rows and columns we want to keep.  I'll also save the file so I can show you.
+Say, we want to crop the image so we just have the car without all the background?  We just have to slice the row and column parts of the array to show just the range of rows and columns we want to keep.  
+
+We will need only the pixels from rows 350 to 1100.
+We will need only the pixels from columns 200 to 1400.
+
+I'll also save the file so I can show you.
 
 ```ruby
 cropped = camaro[350:1100, 200:1400, :]
@@ -92,6 +97,8 @@ So, here, we're taking rows 350 - 1100, and columns 200 - 1400, and everything f
 Here's the cropped image:
 
 ![Cropped Image of a yellow camaro car](/img/posts/camaro_cropped.jpg)
+
+There we are, image cropped!
 
 ---
 
@@ -116,8 +123,9 @@ So we end up with our car flipped on its roof!
 ![Flipped Image of a yellow camaro car](/img/posts/camaro_vertical_flipped.jpg)
 
 ---
+## mirror image
 
-What we can flip vertically, we can of course flip horizontally as well.  We just need to reverse the order of the columns instead of the rows.
+What we can flip vertically, we can of course flip horizontally as well.  We just need to reverse the order of the columns instead of the rows.  
 
 ```ruby
 horizontal_flipped = camaro[:, ::-1, :]
@@ -129,12 +137,14 @@ io.imsave("camaro_horizontal_flipped.jpg", horizontal_flipped)
 ```
 ![Horizontally Flipped Image of a yellow camaro car](/img/posts/camaro_horizontal_flipped.jpg)
 
+Now the car is driving on the correct side of the road!  I feel safer already.
+
 ---
 ## colour channels
 
 Right, it's time to get a bit arty and start messing with the colour channels.  
 
-I'm going to split out the colour channels to create 3 images of my car, and then glue them together in a rainbow array.  I'll save all the images so you can see them.  I can see them in the spydery-thing anyway using matplotlib, but sharing is caring, and this is starting to look amazing!
+I'm going to split out the colour channels to create 3 images of my car, and then glue them together in a rainbow array.  I'll save all the images to files so you can see them on the blog.  I can see them in the spydery-thing anyway using matplotlib, but sharing is caring, and this is starting to look amazing, so I wouldn't want you to miss it!
 
 
 ```ruby
@@ -171,7 +181,7 @@ io.imsave("camaro_blue.jpg", blue)
 ---
 ## make a stack!
 
-Now, we just stack our 3 different coloured arrays, one on top of the other! 
+Now, we just stack our 3 different coloured arrays, one on top of the other to make a single stacked image, that an arty teenager might hang on their wall!   We'll use the vertical stack function, vstack for that.
 
 ```ruby
 camaro_rainbow = np.vstack((red, green, blue))
@@ -182,7 +192,7 @@ io.imsave("camaro_rainbow.jpg", camaro_rainbow)
 
 ![stacked images of red, green and blue version of camaro car](/img/posts/camaro_rainbow.jpg)
 
-Move over Andy Warhol, this art stuff is just maths!
+Move over Andy Warhol, this art stuff is really just maths!
 
 ---
-I hope you've enjoyed this investigation of image manipulation using just the Numpy package and Python.  It's pretty impressive what you can do with just a bit of maths!
+I hope you have enjoyed this investigation of image manipulation using Numpy arrays and Python.  I hope to see you on our next intrepid Python adventure.
