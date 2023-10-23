@@ -7,12 +7,12 @@ tags: [Python, Numpy, Images]
 ---
 
 ## introduction
-In this post I'm going to explore using Python and Numpy only to manipulate a jpg image.   I'll be using skimage to import the image, and matplotlib as well, to render it so I can see what's happening.  I'll be using the typical naming conventions for these packages, to make it easier for people familiar with them to read the code.
+In this post I'm going to explore using Python and Numpy only to manipulate a jpg image.   I'll be using skimage to import the image file, and matplotlib to render it so I can see what's happening as the code progresses.  I'll be using the typical naming conventions for these packages, to make it easier for people familiar with them to read the code.
 
 ---
 
 ## jpg images in numpy
-Let's start with our basic image file which is a jpeg file of photograph of a a yellow car.
+Let's start with our basic image file which is a jpeg file of photograph of a yellow camaro car, speeding along on the wrong side of the road.
 
 ![Image of a yellow camaro car](/img/posts/camaro.jpg)
 
@@ -77,7 +77,6 @@ So now we understand this data structure, we can use simple maths on the array t
 ---
 
 ## cropping images
-
 Say, we want to crop the image so we just have the car without all the background?  We just have to slice the row and column parts of the array to show just the range of rows and columns we want to keep.  
 
 We will need only the pixels from rows 350 to 1100.
@@ -103,8 +102,7 @@ There we are, image cropped!
 ---
 
 ## flipping images
-
-If we want to flip an image on the vertical axis, so it is upside down, what do you think we need to do?  That's right, we maths it!
+If we want to flip an image on the vertical axis, so it is upside down, what do you think we need to do?  That's right, we maths it!  Numpy makes this really easy too, as you can see.
 
 ```ruby
 vertical_flipped = camaro[::-1, :, :]
@@ -114,17 +112,16 @@ plt.show()
 io.imsave("camaro_vertical_flipped.jpg", vertical_flipped)
 
 ```
-So, what's this code doing?
+So, what's this array code doing?
 
 Basically the ::-1 part says take every row but in reverse!  The other two parts say: take every column, and take every colour channel.
 
-So we end up with our car flipped on its roof!
+So we end up with our car flipped on its roof!  Which is likely to happen if it keeps driving on the wrong side of the road.
 
 ![Flipped Image of a yellow camaro car](/img/posts/camaro_vertical_flipped.jpg)
 
 ---
-## mirror image
-
+## mirror images
 What we can flip vertically, we can of course flip horizontally as well.  We just need to reverse the order of the columns instead of the rows.  
 
 ```ruby
@@ -141,7 +138,6 @@ Now the car is driving on the correct side of the road!  I feel safer already.
 
 ---
 ## colour channels
-
 Right, it's time to get a bit arty and start messing with the colour channels.  
 
 I'm going to split out the colour channels to create 3 images of my car, and then glue them together in a rainbow array.  I'll save all the images to files so you can see them on the blog.  I can see them in the spydery-thing anyway using matplotlib, but sharing is caring, and this is starting to look amazing, so I wouldn't want you to miss it!
@@ -149,7 +145,11 @@ I'm going to split out the colour channels to create 3 images of my car, and the
 
 ```ruby
 # select the red only channels from the camaro image array
+
+# create a new array of the same 3D shape and fill it with zeros
 red = np.zeros(camaro.shape, dtype="uint8")
+
+# copy over the Red intensity values only, from the original image.  Red is item [0] in the 3rd dimension.
 red[:, :, 0] = camaro[:, :, 0]
 plt.imshow(red)
 plt.show()
@@ -159,29 +159,38 @@ io.imsave("camaro_red.jpg", red)
 ![red only image of camaro car](/img/posts/camaro_red.jpg)
 
 ```ruby
+# select the green only channels from the camaro image array
+
+# create a new array of the same 3D shape and fill it with zeros
 green = np.zeros(camaro.shape, dtype="uint8")
+
+# copy over the Green intensity values only, from the original image.  Green is item [1] in the 3rd dimension.
 green[:, :, 1] = camaro[:, :, 1]
 plt.imshow(green)
 plt.show()
 io.imsave("camaro_green.jpg", green)
 ```
 
-![red only image of camaro car](/img/posts/camaro_green.jpg)
+![green only image of camaro car](/img/posts/camaro_green.jpg)
 
 ```ruby
+# select the blue only channels from the camaro image array
+
+# create a new array of the same 3D shape and fill it with zeros
 blue = np.zeros(camaro.shape, dtype="uint8")
+
+# copy over the blue intensity values only, from the original image.  Blue is item [2] in the 3rd dimension.
 blue[:, :, 2] = camaro[:, :, 2]
 plt.imshow(blue)
 plt.show()
 io.imsave("camaro_blue.jpg", blue)
 ```
 
-![red only image of camaro car](/img/posts/camaro_blue.jpg)
+![blue only image of camaro car](/img/posts/camaro_blue.jpg)
 
 ---
 ## make a stack!
-
-Now, we just stack our 3 different coloured arrays, one on top of the other to make a single stacked image, that an arty teenager might hang on their wall!   We'll use the vertical stack function, vstack for that.
+Now, we just stack our 3 different coloured arrays, one on top of the other to make a single stacked image array, that an arty person might print out and hang on their wall!   We'll use the vertical stack function, vstack for that.
 
 ```ruby
 camaro_rainbow = np.vstack((red, green, blue))
