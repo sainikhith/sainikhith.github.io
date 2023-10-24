@@ -171,7 +171,7 @@ io.imsave("camaro_horizontal_flipped.jpg", horizontal_flipped)
 ```
 ![Horizontally Flipped Image of a yellow camaro car](/img/posts/camaro_horizontal_flipped.jpg)
 
-Now the car is driving on the correct side of the road!  I feel safer already.
+Now the car is driving on the correct side of the road!  I feel safer already.  Although, where is the camera-man standing?  I'm not sure he survived!
 
 ---
 ## colour channels
