@@ -1,18 +1,55 @@
 ---
 layout: post
 title: Image Manipulation with Numpy
-description: In this post I'm going to explore using Python and Numpy to quickly calculate all the planet volumes in the solar system!
+description: In this post I'm going to explore using Python and Numpy to manipulate a jpg image, and do some of the kinds...
 image: "/posts/camaro_rainbow_cropped_h.jpg"
 tags: [Python, Numpy, Images]
 ---
 
 ## introduction
-In this post I'm going to explore using Python and Numpy only to manipulate a jpg image.   I'll be using skimage to import the image file, and matplotlib to render it so I can see what's happening as the code progresses.  I'll be using the typical naming conventions for these packages, to make it easier for people familiar with them to read the code.
+In this post I'm going to explore using Python and Numpy to manipulate a jpg image, and do some of the kinds of transformations that you might normally do in a graphics design tool like Photoshop or Paint!   
+
+Why? Because we can!  And by doing this, we will understand a lot more about computer based images, which will give us the basic foundation to understand what DALL-E and similar AI tools are doing with their magic and fairy dust - when we get to that stage. 
+
+I'll be using some python packages I haven't played with before.  Skimage to import the image file, and matplotlib to render it so I can see what's happening as the code progresses.  I'll be using the typical naming conventions for these packages, to make it easier for people familiar with them to read the code.
 
 ---
 
+## the jpg image format
+First, a bit of background and context.  JPG or JPEG stands for Joint Photographic Experts Group, which is the name of the committee that created the JPEG standard file format. JPG is one of the most common image file formats used for digital photos and images on the web.
+
+At a basic level, JPG images work by compressing photographic image data to reduce the file size. This allows the images to take up less storage space and transmit faster across the internet.
+
+The compression happens in a few key steps:
+
+* The image is divided into blocks of 8x8 pixels.
+* Each block goes through a mathematical transformation called the Discrete Cosine Transform (DCT). This converts the pixel values into frequency components.
+* The higher frequency components, which are less visible to the human eye, are discarded. This is where the lossy compression happens.
+* The remaining components are quantised - converted into integer values that can be efficiently encoded.
+* The quantised values are encoded and compressed using a technique called run-length encoding. This further reduces redundant data.
+* The compressed data is stored in the JPG file along with some header information like image size.
+* When the JPG is opened again, the process is reversed - the image data is extracted, decoded, de-quantised and reconstructed into an approximation of the original image.
+
+The amount of compression (and loss of quality) can be adjusted when saving the JPG. Higher quality JPGs compress less by retaining more high frequency components. Lower quality JPGs compress more and lose finer details and resolution.
+
+So in summary, JPG compression works by selectively discarding fine details that are less visible to the human eye, allowing the images to take up less digital storage and transmission space.
+---
+
 ## jpg images in numpy
-Let's start with our basic image file which is a jpeg file of photograph of a yellow camaro car, speeding along on the wrong side of the road.
+When jpg images are opened using Numpy, they are converted to a 3D Numpy array.
+
+Think of a Rubik's Cube, where one dimension of the cube represents the width of an image (in this case 3), with indexes 0, 1 and 2, one dimension represents the height of an image (also 3), and the third dimension (front to back, say) represents the colour intensity on 3 channels, Red, Green and Blue.  Reminder: Numpy arrays are indexed from zero.
+
+So this Rubik's cube could represent a 3 x 3 pixel image, containing 9 pixels.  
+* The front panel of cubes could represent the red intensity of each of the 9 pixels, at position 0 in the array on the front to back dimension.  
+* The back panel of cubes could represent the blue intensity of each of the pixels, at position 2 in the array.   
+* The middle section of cubes sandwiched between the front and back, would represent the green intensity of each of the 9 pixels, at position 1 in the array on the front to back dimension.
+
+All the colours of the image are then made up of the combination of the 3 colour intensities, front to back, for each pixel.
+
+---
+## today's challenge - manipulating a jpg image.
+Let's start with our basic image file which is a jpeg file of photograph of a yellow Camaro car, speeding along on the wrong side of the road.
 
 ![Image of a yellow camaro car](/img/posts/camaro.jpg)
 
@@ -202,6 +239,13 @@ io.imsave("camaro_rainbow.jpg", camaro_rainbow)
 ![stacked images of red, green and blue version of camaro car](/img/posts/camaro_rainbow.jpg)
 
 Move over Andy Warhol, this art stuff is really just maths!
-
 ---
-I hope you have enjoyed this investigation of image manipulation using Numpy arrays and Python.  I hope to see you on our next intrepid Python adventure.
+#### random dad joke alert
+
+```ruby
+# Q. Why don't JPG files make good accountants?
+
+# A. Because they tend to lose a lot of details in the compression process.
+```
+---
+I hope you have enjoyed this investigation of jpg image manipulation using Numpy arrays and Python.  Numpy is really making some of this stuff look like childs-play! I hope to see you on our next intrepid Python adventure.
