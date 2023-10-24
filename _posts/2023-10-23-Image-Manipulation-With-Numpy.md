@@ -33,8 +33,8 @@ The compression happens in a few key steps:
 The amount of compression (and loss of quality) can be adjusted when saving the JPG. Higher quality JPGs compress less by retaining more high frequency components. Lower quality JPGs compress more and lose finer details and resolution.
 
 So in summary, JPG compression works by selectively discarding fine details that are less visible to the human eye, allowing the images to take up less digital storage and transmission space.
----
 
+---
 ## jpg images in numpy
 When jpg images are opened using Numpy, they are converted to a 3D Numpy array.
 
