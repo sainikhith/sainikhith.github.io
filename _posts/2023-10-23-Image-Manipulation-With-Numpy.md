@@ -183,7 +183,7 @@ I'm going to split out the colour channels to create 3 images of my car, and the
 ```ruby
 # select the red only channels from the camaro image array
 
-# create a new array of the same 3D shape and fill it with zeros
+# create a new array of the same 3D shape and unsigned integer data-type, and fill it with zeros
 red = np.zeros(camaro.shape, dtype="uint8")
 
 # copy over the Red intensity values only, from the original image.  Red is item [0] in the 3rd dimension.
@@ -198,7 +198,7 @@ io.imsave("camaro_red.jpg", red)
 ```ruby
 # select the green only channels from the camaro image array
 
-# create a new array of the same 3D shape and fill it with zeros
+# create a new array of the same 3D shape, and fill it with zeros
 green = np.zeros(camaro.shape, dtype="uint8")
 
 # copy over the Green intensity values only, from the original image.  Green is item [1] in the 3rd dimension.
@@ -239,6 +239,7 @@ io.imsave("camaro_rainbow.jpg", camaro_rainbow)
 ![stacked images of red, green and blue version of camaro car](/img/posts/camaro_rainbow.jpg)
 
 Move over Andy Warhol, this art stuff is really just maths!
+
 ---
 #### random dad joke alert
 
