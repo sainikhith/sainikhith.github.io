@@ -8,4 +8,4 @@ tags: [Tableau, Data Viz, Earthquakes]
 
 # Tableau Earthquake Dashboard
 
-<iframe seamless frameborder="0" src="https://public.tableau.com/app/profile/helen.abell/viz/DSIEarthquakes/DSIEarthquakeTracker?:embed=yes&:display_count=yes&:showVizHome=no" width = '1090' height = '900'></iframe>
+<iframe seamless frameborder="0" src="https://public.tableau.com/shared/469YTCT49?:embed=yes&:display_count=yes&:showVizHome=no" width = '1090' height = '900'></iframe>
