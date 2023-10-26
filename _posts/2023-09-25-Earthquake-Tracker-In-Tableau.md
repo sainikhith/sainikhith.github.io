@@ -22,11 +22,11 @@ We need all these elements on one dashboard so that we can easily see patterns. 
 ### Actions <a name="overview-actions"></a>
 
 * First we needed to import the supplied data into Tableau.
-* Then we built a map view, showing the locations of each of the earthquakes on a map, and using the size and colour of the blob to indicate the magnitude of the earthquake.
-* Then we created a top ten biggest earthquakes list.
+* Second, we built a map view, showing the locations of each of the earthquakes on a map, and using the size and colour of the circle to indicate the magnitude of the earthquake.
+* Then we created a top ten largest earthquakes list, showing their location and magnitude.
 * Then we built an element showing the percentage of earthquakes by broad location.
 * Finally we created a sortable visualisation of earthquakes by frequency, average and maximum magnitude.
-* These elements were arranged within a single dashboard, and all hooked up to a date control. 
+* These elements were arranged within a single dashboard, and all hooked up to a date filter so you can scroll through the data day by day over the 30 day period, or look at it all at once. 
 
 ### Results <a name="overview-results"></a>
 
