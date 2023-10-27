@@ -8,10 +8,12 @@ tags: [Python, Primes]
 
 # Project Overview  <a name="overview-main"></a>
 
-## introduction
-In this post I'm going to run through creating a function in Python that can quickly find all the Prime numbers below a given value.  For example, if I passed the function a value of 100, it would find all the prime numbers below 100.
+## Introduction
+In this post I'm going to run through creating a function in Python that can quickly find all the Prime numbers below a given value.  
+I've created this project to demonstrate the use of some basic Python functionality and data types in a simple mathematical problem.  
 
-I've created this project to demonstrate the use of some basic Python functionality in a simple mathematical problem.  There are a few good reasons for using Python to solve mathematical problems like this:  
+### Why python?
+There are a few good reasons for using Python to solve mathematical problems like this:  
 
 * Python has simple and clean syntax that makes it easy to write and understand code. This is important for a maths-heavy algorithm like prime number calculations.
 * Python has libraries and data types that provide highly optimised functions and data structures for numerical computing.
@@ -20,11 +22,10 @@ I've created this project to demonstrate the use of some basic Python functional
 
 Of course, many other languages like C, C++, R, Rust, Julia etc would also work. However, I find Python strikes a nice balance between simplicity, available libraries, and performance for this type of maths-focused code. The main thing is using a language that makes the algorithm clear and maintainable.
 
-### notes
-* REPL stands for Read Evaluate Print and Loop.  It basically means you can interactively run parts of your python code and see the results, while you're still developing it.  You don't have to finish it and fix all the syntax errors so it compiles before you can see if you have a problem with your approach.  This was a new concept for me, but I like it.
+> REPL stands for Read Evaluate Print and Loop.  It basically means you can interactively run parts of your python code and see the  results, while you're still developing it.  You don't have to finish it and fix all the syntax errors so it compiles before you can see if you have a problem with your approach.  This was a new concept for me, but I like it.
 
 ---
-### what is a prime number?
+### What is a prime number?
 A prime number is a whole number greater than 1 that can only be divided evenly by 1 and itself to produce a whole number. For example, 5 is a prime number because it can only be divided evenly by 1 and 5. It cannot be divided evenly by any other whole numbers.
 
 Some key things about prime numbers:
@@ -37,6 +38,9 @@ Some key things about prime numbers:
 
 So in simple terms, a prime number is a lone wolf - it can't be evenly split into smaller whole number groups. It's only divisible by itself and 1. This makes primes the atoms of the mathematics world. 
 
+---
+## Context
+Our objective is to create a function in Python that can quickly find all the Prime numbers below a given value.  For example, if I passed the function a value of 100, it would find all the prime numbers below 100.
 ---
 ## Actions
 
@@ -52,6 +56,8 @@ In order to approach this problem we go through the following stages.
 ---
 ## Results
 We find that, on my machine, it is possible to accurately identify prime numbers up to 1,000,000 in less than a second, using only core Python data types and functionality.
+
+We also did some basic quick visualisation using Excel to see the way the incidence of prime numbers tails off by data range as you get higher.  This can be seen in the image above, where we see that there are more primes in the range of 1 - 2501 than in subsequent number ranges, but that this decrease becomes more gradual as you head up towards 100,000.  This is consistent with Euclid's proof that there is no maximum prime number!
 
 ---
 # Project Detail  <a name="project-detail"></a>
@@ -86,7 +92,7 @@ while we still have numbers remaining in our list:
 Calculate summary data.  
 Return the list of primes found to the caller.  
 ```
-
+---
 ## implementation <a name="implementation"></a>
 
 In this step we will start putting the Python code together, and using the REPL, we can test each part as we go through, to make sure it is giving us the results we expect.
@@ -271,7 +277,6 @@ We have reports that, while most of the time everything works perfectly, occasio
 I try, but cannot replicate it on my machine. I run tests, I debug through the code. It's all working great for me!  So to solve this intermittent problem we need to look again at the code in our function, and question our assumptions.  
 
 ---
-
 #### using pop() on a set in python
 
 It turns out we have a code-smell in our code.  We can't rely on using the pop() method on a set to give us the minimum number, because a set in python is un-ordered by definition.  That means, pop() *could* randomly select any value from the set.  In practice, at least on my machine with my setup, it appears to be consistently extracting the lowest element of the set.  However, we cannot rely on this!
@@ -296,6 +301,8 @@ prime = prime_suspects.pop()
 prime = min(sorted(prime_suspects))
 prime_suspects.remove(prime)
 ```
+
+---
 ## solution version 2
 Here is the new function, where we sort the set data before finding the minimum value and removing it from the set:
 
@@ -330,6 +337,7 @@ def find_primes_under(primes_limit=20):
     return primes_list
 ```
 
+---
 ### testing solution version 2
 When we make this change, we find that we have fixed the accuracy problem but we see a massive decrease in performance.  Our test for 100,000 now takes over 5 seconds!
 
@@ -341,6 +349,7 @@ The calculation took 5.072026491165161 seconds.
 
 Because now we have to sort the list for each iteration of the loop in order to get the minimum value, it's a lot slower than what we saw with version 1.  Especially as we go for higher numbers of primes and longer lists!
 
+---
 ## solution version 3
 After further research we find there is such a thing as an OrderedSet in the ordered_set package.  You have to install it with pip install ordered_set before you can use it. Optimistically, we will try this out.
 
@@ -380,6 +389,7 @@ def find_primes_under(primes_limit=20):
 
 ```
 
+---
 ### testing solution version 3
 
 Unfortunately, although using this new type lets us go back to the old pop approach, and it works accurately, it was still no quicker than using the sorted option above, in my tests.  In fact it was slower!  7 seconds for 100,000 primes.  Not impressed.
@@ -392,6 +402,7 @@ primes_list = find_primes_under(100000)
 >>> The calculation took 7.056451082229614 seconds.
 ```
 
+---
 ## solution version 4
 So, lets go back to the drawing board, and to the Python built-in types, and think through the logic again.  There's got to be a simple solution using what we know.
 
@@ -440,6 +451,8 @@ def find_primes_under(primes_limit=20):
 
     return primes_list
 ```
+
+---
 ### testing solution version 4
 
 ```ruby
@@ -456,6 +469,7 @@ The largest prime is 999983.
 The calculation took 120.53264737129211 seconds.
 ```
 
+---
 ### results of version 4
 Ok, it's 3 am and I think that's probably as good as it's going to get, for tonight at least!  100,000 checked for primes in just under a second, and a million in 2 minutes, and no unreliable behaviour!
 
@@ -522,6 +536,8 @@ def find_primes_under(primes_limit=20):
 
     return prime_suspects
 ```
+
+---
 ### testing solution version 5
 
 And the performance is pretty acceptable too!
@@ -553,6 +569,7 @@ primes = find_primes_under(1000000)
 
 Oh yes.  All primes under a million, in half a second! and only using basic python functionality.  That will do.
 
+---
 ## postscript added 27/10/2023  - solution version 6
 
 There's one final tweak that occurred to me, that will optimise the function even further, and I think is going to make it even more efficient than our first, inaccurate attempt!
@@ -601,6 +618,7 @@ def find_primes_under(primes_limit=20):
     return prime_suspects
 ```
 
+---
 ### testing solution version 6
 
 We'll check for accuracy first with the lower limits where we can inspect the results
@@ -637,4 +655,4 @@ primes = find_primes_under(1000000)
 >>> The calculation took 0.25096797943115234 seconds.
 
 ```
-Now that's impressive.  We have calculated all the prime numbers up to a million, accurately, in a quarter of a second, using only Python datatypes, and the Python interpreter.  This is faster than our original inaccurate algorithm as well.
+Now that's impressive.  We have calculated all the prime numbers up to a million, accurately, in a quarter of a second, using only Python data types, and the Python interpreter.  This is faster than our original inaccurate algorithm as well.
