@@ -601,7 +601,7 @@ def find_primes_under(primes_limit=20):
     return prime_suspects
 ```
 
-### testing solution version 5
+### testing solution version 6
 
 We'll check for accuracy first with the lower limits where we can inspect the results
 
