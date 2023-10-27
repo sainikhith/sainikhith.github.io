@@ -58,4 +58,12 @@ You can then use the date control to page through day by day and see how the dat
 
 The response-time is a little slow, so you have to wait a couple of seconds before the data changes.  I'm assuming this is because the free Tableau Public cloud deployment isn't that fast, and a paid-for enterprise version could be faster.
 
+Looking at our analysis, we can quickly see that over the 30 day period:
+
+* The Philippines had the biggest earthquake, followed by Chile and Oklahoma
+* However the locations with the largest earthquakes on average were Samoa, Svalbard & Jan Mayen, and Vanuatu
+* Most of the earthquakes were in North America by broad location, by a large margin
+* At a more granular level, Puerto Rico, Hawaii and Alaska had the most frequent earthquakes
+* Visually we can see the earthquake fault lines on the map
+
 <iframe seamless frameborder="0" src="https://public.tableau.com/shared/469YTCT49?:embed=yes&:display_count=yes&:showVizHome=no" width = '1090' height = '900'></iframe>
