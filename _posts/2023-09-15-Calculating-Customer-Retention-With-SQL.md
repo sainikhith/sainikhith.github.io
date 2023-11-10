@@ -2,7 +2,7 @@
 layout: post
 title: Calculating Customer Retention Rate In SQL
 description: In this post I'm going to explore using SQL to calculate customer retention rate from a grocery stores transaction data
-image: "/posts/planets.jpg"
+image: "/posts/grocery.jpeg"
 tags: [SQL, Postgresql, Transaction Data Insights]
 ---
 
