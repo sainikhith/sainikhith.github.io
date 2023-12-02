@@ -1,9 +1,10 @@
 ---
 layout: post
 title: Assessing Campaign Performance Using Chi-Square Test For Independence
-description: In this post we use the Chi-Square Hypothesis Test to analyse the results of an A B Test to understand if there is a significant difference in signup rate between their cheap mailer and their expensive mailer
+description: In this project we use the Chi-Square Hypothesis Test to assess the performance of two types of mailers on signup...
 image: "/posts/abtest.jpeg"
 tags: [AB Testing, Hypothesis Testing, Chi-Square, Python]
+
 
 # Table of contents
 
