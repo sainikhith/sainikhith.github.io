@@ -1,8 +1,8 @@
 ---
 layout: post
 title: Assessing Campaign Performance Using Chi-Square Test For Independence
-description: In this project we use the Chi-Square Hypothesis Test to assess the performance of two types of mailers on signup...
-image: "/posts/abtest2.jpeg"
+description: In this project, we use the Chi-Square Hypothesis Test to assess the performance of two types of mailers on sign-up...
+image: "/posts/ABTestTeapots.jpeg"
 tags: [AB Testing, Hypothesis Testing, Chi-Square, Python]
 ---
 
@@ -14,22 +14,22 @@ tags: [AB Testing, Hypothesis Testing, Chi-Square, Python]
     - [Results & Discussion](#overview-results)
 - [01. Concept Overview](#concept-overview)
 - [02. Data Overview & Preparation](#data-overview)
-- [03. Applying Chi-Square Test For Independence](#chi-square-application)
+- [03. Applying the Chi-Square Test For Independence](#chi-square-application)
 - [04. Analysing The Results](#chi-square-results)
 - [05. Discussion](#discussion)
 
 ___
 
 # Project Overview  <a name="overview-main"></a>
-In this project, we apply Chi-Square Test For Independence (a Hypothesis Test) to assess the performance of two types of mailers that were sent out to promote a new service! 
+In this project, we apply the Chi-Square Test For Independence (a Hypothesis Test) to assess the performance of two types of mailers that were sent out to promote a new venture! 
 
 ### Context <a name="overview-context"></a>
 
-Earlier in the year, our client, a grocery retailer, ran a campaign to promote their new "Delivery Club" - an initiative that costs a customer $100 per year for membership, but offers free grocery deliveries rather than the normal cost of $10 per delivery.
+Earlier in the year, our client, a  high-end restaurant, ran a campaign to promote their new "Afternoon Tea Club" - an initiative that costs a customer $500 per year for membership, but offers exclusive monthly tea parties.
 
-For the campaign promoting the club, customers were put randomly into three groups - the first group received a low quality, low cost mailer, the second group received a high quality, high cost mailer, and the third group was a control group, receiving no mailer at all.
+For the campaign promoting the club, customers were put randomly into three groups - the first group received a low-quality, low-cost mailer in black and white on cheap paper, the second group received a high-quality, high-cost mailer, on glossy high-quality card and the third group was a control group, receiving no mailer at all.
 
-The client knows that customers who were contacted, signed up for the Delivery Club at a far higher rate than the control group, but now wants to understand if there is a significant difference in signup rate between the cheap mailer and the expensive mailer.  This will allow them to make more informed decisions in the future, with the overall aim of optimising campaign ROI!
+The client knows that customers who were contacted, signed up for the Club at a far higher rate than the control group, but now wants to understand if there is a significant difference in sign-up rate between the cheap mailer and the expensive mailer.  This will allow them to make more informed decisions in the future, with the overall aim of optimising campaign ROI!
 
 <br>
 <br>
@@ -72,9 +72,9 @@ The Critical Value for our specified Acceptance Criteria of 0.05 is **3.84**
 
 Based upon these statistics, we retain the null hypothesis and conclude that there is no relationship between mailer type and signup rate.
 
-In other words - while we saw that the higher cost Mailer 2 had a higher signup rate (37.8%) than the lower cost Mailer 1 (32.8%) it appears that this difference is not significant, at least at our Acceptance Criteria of 0.05.
+In other words - while we saw that the higher-cost Mailer 2 had a higher signup rate (37.8%) than the lower-cost Mailer 1 (32.8%) it appears that this difference is not significant, at least at our Acceptance Criteria of 0.05.
 
-Without running this Hypothesis Test, the client may have concluded that they should always look to go with higher cost mailers - and from what we've seen in this test, that may not be a great decision.  It would result in them spending more, but not *necessarily* gaining any extra revenue as a result
+Without running this Hypothesis Test, the client may have concluded that they should always look to go with higher-cost mailers - and from what we've seen in this test, that may not be a great decision.  It would result in them spending more, but not *necessarily* gaining any extra revenue as a result
 
 Our results here also do not say that there *definitely isn't a difference between the two mailers* - we are only advising that we should not make any rigid conclusions *at this point*.  
 
@@ -149,9 +149,9 @@ ___
 <br>
 # Data Overview & Preparation  <a name="data-overview"></a>
 
-In the client database, we have a _campaign_data_ table that shows us which customers received each type of "Delivery Club" mailer, which customers were in the control group, and which customers joined the club as a result.
+In the client database, we have a _campaign_data_ table that shows us which customers received each type of "Afternoon Tea Club" mailer, which customers were in the control group, and which customers joined the club as a result.
 
-For this task, we are looking to find evidence that the Delivery Club signup rate for customers who received "Mailer 1" (low cost) was different from those who received "Mailer 2" (high cost) and thus from the *campaign_data* table we will just extract customers in those two groups, and exclude customers who were in the control group.
+For this task, we are looking to find evidence that the Afternoon Tea Club signup rate for customers who received "Mailer 1" (low cost) was different from those who received "Mailer 2" (high cost) and thus from the *campaign_data* table we will just extract customers in those two groups, and exclude customers who were in the control group.
 
 In the code below, we:
 
@@ -180,17 +180,17 @@ A sample of this data (the first 10 rows) can be seen below:
 
 | **customer_id** | **campaign_name** | **mailer_type** | **signup_flag** |
 |---|---|---|---|
-| 74 | delivery_club | Mailer1 | 1 |
-| 524 | delivery_club | Mailer1 | 1 |
-| 607 | delivery_club | Mailer2 | 1 |
-| 343 | delivery_club | Mailer1 | 0 |
-| 322 | delivery_club | Mailer2 | 1 |
-| 115 | delivery_club | Mailer2 | 0 |
-| 1 | delivery_club | Mailer2 | 1 |
-| 120 | delivery_club | Mailer1 | 1 |
-| 52 | delivery_club | Mailer1 | 1 |
-| 405 | delivery_club | Mailer1 | 0 |
-| 435 | delivery_club | Mailer2 | 0 |
+| 74 | tea_club | Mailer1 | 1 |
+| 524 | tea_club | Mailer1 | 1 |
+| 607 | tea_club | Mailer2 | 1 |
+| 343 | tea_club | Mailer1 | 0 |
+| 322 | tea_club | Mailer2 | 1 |
+| 115 | tea_club | Mailer2 | 0 |
+| 1 | tea_club | Mailer2 | 1 |
+| 120 | tea_club | Mailer1 | 1 |
+| 52 | tea_club | Mailer1 | 1 |
+| 405 | tea_club | Mailer1 | 0 |
+| 435 | tea_club | Mailer2 | 0 |
 
 <br>
 In the DataFrame we have:
@@ -268,11 +268,11 @@ Based upon our observed values, we can give this all some context with the sign-
 * Mailer 1 (Low Cost): **32.8%** signup rate
 * Mailer 2 (High Cost): **37.8%** signup rate
 
-From this, we can see that the higher cost mailer does lead to a higher signup rate.  The results from our Chi-Square Test will provide us more information about how confident we can be that this difference is robust, or if it might have occurred by chance.
+From this, we can see that the higher-cost mailer does lead to a higher signup rate.  The results from our Chi-Square Test will provide us more information about how confident we can be that this difference is robust, or if it might have occurred by chance.
 
 We have a Chi-Square Statistic of **1.94** and a p-value of **0.16**.  The critical value for our specified Acceptance Criteria of 0.05 is **3.84**
 
-**Note** When applying the Chi-Square Test above, we use the parameter *correction = False* which means we are applying what is known as the *Yate's Correction* which is applied when your Degrees of Freedom is equal to one.  This correction helps to prevent overestimation of statistical significance in this case.
+**Note** When applying the Chi-Square Test above, we use the parameter *correction = False* which means we are applying what is known as the *Yate's Correction* which is applied when your Degrees of Freedom is equal to one.  This correction helps to prevent the overestimation of statistical significance in this case.
 
 ___
 
@@ -313,9 +313,9 @@ ___
 <br>
 # Discussion <a name="discussion"></a>
 
-While we saw that the higher cost Mailer 2 had a higher signup rate (37.8%) than the lower cost Mailer 1 (32.8%) it appears that this difference is not significant, at least at our Acceptance Criteria of 0.05.
+While we saw that the higher-cost Mailer 2 had a higher signup rate (37.8%) than the lower-cost Mailer 1 (32.8%) it appears that this difference is not significant, at least at our Acceptance Criteria of 0.05.
 
-Without running this Hypothesis Test, the client may have concluded that they should always look to go with higher cost mailers - and from what we've seen in this test, that may not be a great decision.  It would result in them spending more, but not *necessarily* gaining any extra revenue as a result
+Without running this Hypothesis Test, the client may have concluded that they should always look to go with higher-cost mailers - and from what we've seen in this test, that may not be a great decision.  It would result in them spending more, but not *necessarily* gaining any extra revenue as a result
 
 Our results here also do not say that there *definitely isn't a difference between the two mailers* - we are only advising that we should not make any rigid conclusions *at this point*.  
 
