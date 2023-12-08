@@ -41,17 +41,17 @@ For this test, as it is focused on comparing the *rates* of two groups - we appl
 
 * The resulting test statistic for both tests will be the same
 * The Chi-Square Test can be represented using 2x2 tables of data - meaning it can be easier to explain to stakeholders
-* The Chi-Square Test can extend out to more than 2 groups - meaning the client can have one consistent approach to measuring significance
+* The Chi-Square Test can extend out to more than 2 groups - meaning the client can have one consistent approach to measuring significance.
 
 From the *campaign_data* table in the client database, we isolated customers who received "Mailer 1" (low cost) and "Mailer 2" (high cost) for this campaign, and excluded customers who were in the control group.
 
 We set out our hypotheses and Acceptance Criteria for the test, as follows:
 
-**Null Hypothesis:** There is no relationship between mailer type and signup rate. They are independent.
-**Alternate Hypothesis:** There is a relationship between mailer type and signup rate. They are not independent.
+**Null Hypothesis:** There is no relationship between mailer type and sign-up rate. They are independent.
+**Alternate Hypothesis:** There is a relationship between mailer type and sign-up rate. They are not independent.
 **Acceptance Criteria:** 0.05
 
-As a requirement of the Chi-Square Test For Independence, we aggregated this data down to a 2x2 matrix for *signup_flag* by *mailer_type* and fed this into the algorithm (using the *scipy* library) to calculate the Chi-Square Statistic, p-value, Degrees of Freedom, and expected values
+As a requirement of the Chi-Square Test For Independence, we aggregated this data down to a 2x2 matrix for *signup_flag* by *mailer_type* and fed this into the algorithm (using the *scipy* library) to calculate the Chi-Square Statistic, p-value, Degrees of Freedom, and expected values.
 
 <br>
 <br>
@@ -60,8 +60,8 @@ As a requirement of the Chi-Square Test For Independence, we aggregated this dat
 
 Based upon our observed values, we can give this all some context with the sign-up rate of each group.  We get:
 
-* Mailer 1 (Low Cost): **32.8%** signup rate
-* Mailer 2 (High Cost): **37.8%** signup rate
+* Mailer 1 (Low Cost): **32.8%** signup-rate
+* Mailer 2 (High Cost): **37.8%** signup-rate
 
 However, the Chi-Square Test gives us the following statistics:
 
@@ -70,9 +70,9 @@ However, the Chi-Square Test gives us the following statistics:
 
 The Critical Value for our specified Acceptance Criteria of 0.05 is **3.84**
 
-Based upon these statistics, we retain the null hypothesis and conclude that there is no relationship between mailer type and signup rate.
+Based upon these statistics, we retain the null hypothesis and conclude that there is no relationship between mailer type and sign-up rate.
 
-In other words - while we saw that the higher-cost Mailer 2 had a higher signup rate (37.8%) than the lower-cost Mailer 1 (32.8%) it appears that this difference is not significant, at least at our Acceptance Criteria of 0.05.
+In other words - while we saw that the higher-cost Mailer 2 had a higher sign-up rate (37.8%) than the lower-cost Mailer 1 (32.8%) it appears that this difference is not significant, at least at our Acceptance Criteria of 0.05.
 
 Without running this Hypothesis Test, the client may have concluded that they should always look to go with higher-cost mailers - and from what we've seen in this test, that may not be a great decision.  It would result in them spending more, but not *necessarily* gaining any extra revenue as a result
 
@@ -104,12 +104,12 @@ There are many different scenarios we can run Hypothesis Tests on, and they all 
 <br>
 **The Null Hypothesis**
 
-In any Hypothesis Test, we start with the Null Hypothesis. The Null Hypothesis is where we state our initial viewpoint, and in statistics, and specifically Hypothesis Testing, our initial viewpoint is always that the result is purely by chance or that there is no relationship or association between two outcomes or groups
+In any Hypothesis Test, we start with the Null Hypothesis. The Null Hypothesis is where we state our initial viewpoint, and in statistics, specifically Hypothesis Testing, our initial viewpoint is always that the result is purely by chance or that there is no relationship or association between two outcomes or groups.
 
 <br>
 **The Alternate Hypothesis**
 
-The aim of the Hypothesis Test is to look for evidence to support or reject the Null Hypothesis.  If we reject the Null Hypothesis, that would mean we’d be supporting the Alternate Hypothesis.  The Alternate Hypothesis is essentially the opposite viewpoint to the Null Hypothesis - that the result is *not* by chance, or that there *is* a relationship between two outcomes or groups
+The aim of the Hypothesis Test is to look for evidence to support or reject the Null Hypothesis.  If we reject the Null Hypothesis, that would mean we’d be supporting the Alternate Hypothesis.  The Alternate Hypothesis is essentially the opposite viewpoint to the Null Hypothesis - that the result is *not* by chance, or that there *is* a relationship between two outcomes or groups.
 
 <br>
 **The Acceptance Criteria**
