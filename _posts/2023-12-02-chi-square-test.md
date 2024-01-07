@@ -2,7 +2,7 @@
 layout: post
 title: Assessing Campaign Performance Using Chi-Square Test For Independence
 description: In this project, we use the Chi-Square Hypothesis Test to assess the performance of two types of mailers on sign-up...
-image: "/posts/ABTestTeapots.jpeg"
+image: "/posts/ABCGroceryABTest.jpg"
 tags: [AB Testing, Hypothesis Testing, Chi-Square, Python]
 ---
 
@@ -25,11 +25,11 @@ In this project, we apply the Chi-Square Test For Independence (a Hypothesis Tes
 
 ### Context <a name="overview-context"></a>
 
-Earlier in the year, our client, a  high-end restaurant, ran a campaign to promote their new "Afternoon Tea Club" - an initiative that costs a customer $500 per year for membership, but offers exclusive monthly tea parties.
+Earlier in the year, our client, ABC Grocery, ran a campaign to promote their new veg box subscription - an initiative that costs a customer $100 per year for membership.
 
-For the campaign promoting the club, customers were put randomly into three groups - the first group received a low-quality, low-cost mailer in black and white on cheap paper, the second group received a high-quality, high-cost mailer, on glossy high-quality card and the third group was a control group, receiving no mailer at all.
+For the campaign promoting the subscription, customers were put randomly into three groups - the first group received a low-quality, low-cost mailer in black and white on cheap paper, the second group received a high-quality, high-cost mailer, on glossy high-quality card and the third group was a control group, receiving no mailer at all.
 
-The client knows that customers who were contacted, signed up for the Club at a far higher rate than the control group, but now wants to understand if there is a significant difference in sign-up rate between the cheap mailer and the expensive mailer.  This will allow them to make more informed decisions in the future, with the overall aim of optimising campaign ROI!
+The client knows that customers who were contacted, signed up for the subscription at a far higher rate than the control group, but now wants to understand if there is a significant difference in sign-up rate between the cheap mailer and the expensive mailer.  This will allow them to make more informed decisions in the future, with the overall aim of optimising campaign ROI!
 
 <br>
 <br>
@@ -51,7 +51,7 @@ We set out our hypotheses and Acceptance Criteria for the test, as follows:
 **Alternate Hypothesis:** There is a relationship between mailer type and sign-up rate. They are not independent.
 **Acceptance Criteria:** 0.05
 
-As a requirement of the Chi-Square Test For Independence, we aggregated this data down to a 2x2 matrix for *signup_flag* by *mailer_type* and fed this into the algorithm (using the *scipy* library) to calculate the Chi-Square Statistic, p-value, Degrees of Freedom, and expected values.
+As a requirement of the Chi-Square Test For Independence, we aggregated this data down to a 2x2 matrix for *signup_flag* by *mailer_type* and fed this into the algorithm (using the Python *scipy* library) to calculate the Chi-Square Statistic, p-value, Degrees of Freedom, and expected values.
 
 <br>
 <br>
@@ -149,9 +149,9 @@ ___
 <br>
 # Data Overview & Preparation  <a name="data-overview"></a>
 
-In the client database, we have a _campaign_data_ table that shows us which customers received each type of "Afternoon Tea Club" mailer, which customers were in the control group, and which customers joined the club as a result.
+In the client database, we have a _campaign_data_ table that shows us which customers received each type of veg box subscription flyer, which customers were in the control group, and which customers joined the subscription as a result.
 
-For this task, we are looking to find evidence that the Afternoon Tea Club signup rate for customers who received "Mailer 1" (low cost) was different from those who received "Mailer 2" (high cost) and thus from the *campaign_data* table we will just extract customers in those two groups, and exclude customers who were in the control group.
+For this task, we are looking to find evidence that the subscription signup rate for customers who received "Mailer 1" (low cost) was different from those who received "Mailer 2" (high cost) and thus from the *campaign_data* table we will just extract customers in those two groups, and exclude customers who were in the control group.
 
 In the code below, we:
 
@@ -180,17 +180,17 @@ A sample of this data (the first 10 rows) can be seen below:
 
 | **customer_id** | **campaign_name** | **mailer_type** | **signup_flag** |
 |---|---|---|---|
-| 74 | tea_club | Mailer1 | 1 |
-| 524 | tea_club | Mailer1 | 1 |
-| 607 | tea_club | Mailer2 | 1 |
-| 343 | tea_club | Mailer1 | 0 |
-| 322 | tea_club | Mailer2 | 1 |
-| 115 | tea_club | Mailer2 | 0 |
-| 1 | tea_club | Mailer2 | 1 |
-| 120 | tea_club | Mailer1 | 1 |
-| 52 | tea_club | Mailer1 | 1 |
-| 405 | tea_club | Mailer1 | 0 |
-| 435 | tea_club | Mailer2 | 0 |
+| 74 | veg_box | Mailer1 | 1 |
+| 524 | veg_box | Mailer1 | 1 |
+| 607 | veg_box | Mailer2 | 1 |
+| 343 | veg_box | Mailer1 | 0 |
+| 322 | veg_box | Mailer2 | 1 |
+| 115 | veg_box | Mailer2 | 0 |
+| 1 | veg_box | Mailer2 | 1 |
+| 120 | veg_box | Mailer1 | 1 |
+| 52 | veg_box | Mailer1 | 1 |
+| 405 | veg_box | Mailer1 | 0 |
+| 435 | veg_box | Mailer2 | 0 |
 
 <br>
 In the DataFrame we have:
@@ -293,16 +293,16 @@ if p_value <= acceptance_criteria:
 else:
     print(f"As our p-value of {p_value} is higher than our acceptance_criteria of {acceptance_criteria} - we retain the null hypothesis, and conclude that: {null_hypothesis}")
 
->> As our p-value of 0.16351 is higher than our acceptance_criteria of 0.05 - we retain the null hypothesis, and conclude that: There is no relationship between mailer type and signup rate.  They are independent
+>> As our p-value of 0.16351 is higher than our acceptance_criteria of 0.05 - we retain the null hypothesis, and conclude that: There is no relationship between mailer type and signup rate.  They are independent.
 
 
-# print the results (based upon p-value)
+# print the results (based upon chi squared statistic)
 if chi2_statistic >= critical_value:
     print(f"As our chi-square statistic of {chi2_statistic} is higher than our critical value of {critical_value} - we reject the null hypothesis, and conclude that: {alternate_hypothesis}")
 else:
     print(f"As our chi-square statistic of {chi2_statistic} is lower than our critical value of {critical_value} - we retain the null hypothesis, and conclude that: {null_hypothesis}")
     
->> As our chi-square statistic of 1.9414 is lower than our critical value of 3.841458820694124 - we retain the null hypothesis, and conclude that: There is no relationship between mailer type and signup rate.  They are independent
+>> As our chi-square statistic of 1.9414 is lower than our critical value of 3.841458820694124 - we retain the null hypothesis, and conclude that: There is no relationship between mailer type and signup rate.  They are independent.
 
 ```
 <br>
@@ -315,7 +315,7 @@ ___
 
 While we saw that the higher-cost Mailer 2 had a higher signup rate (37.8%) than the lower-cost Mailer 1 (32.8%) it appears that this difference is not significant, at least at our Acceptance Criteria of 0.05.
 
-Without running this Hypothesis Test, the client may have concluded that they should always look to go with higher-cost mailers - and from what we've seen in this test, that may not be a great decision.  It would result in them spending more, but not *necessarily* gaining any extra revenue as a result
+Without running this Hypothesis Test, the client may have concluded that they should always look to go with higher-cost mailers - and from what we've seen in this test, that may not be a great decision.  It would result in them spending more, but not *necessarily* gaining any extra revenue as a result.
 
 Our results here also do not say that there *definitely isn't a difference between the two mailers* - we are only advising that we should not make any rigid conclusions *at this point*.  
 
