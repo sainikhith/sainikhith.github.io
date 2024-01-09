@@ -49,7 +49,9 @@ We set out our hypotheses and Acceptance Criteria for the test, as follows:
 
 **Null Hypothesis:** There is no relationship between mailer type and sign-up rate. They are independent.
 **Alternate Hypothesis:** There is a relationship between mailer type and sign-up rate. They are not independent.
-**Acceptance Criteria:** 0.05
+**Acceptance Criteria:** 0.05 
+
+The acceptance criteria of 0.05 is arbitrary but we commonly select 0.05 (5%) which means that if the outcome we are seeing has a less than 5% probability of happening by chance, then we will reject the null hypothesis, and consider the alternate hypothesis as more likely, and therefore accept it.  The main thing is that, for scientific best practice, we select the acceptance criteria before we perform the test.
 
 As a requirement of the Chi-Square Test For Independence, we aggregated this data down to a 2x2 matrix for *signup_flag* by *mailer_type* and fed this into the algorithm (using the Python *scipy* library) to calculate the Chi-Square Statistic, p-value, Degrees of Freedom, and expected values.
 
