@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Predicting Customer Loyalty Using ML
+title: Predicting Customer Loyalty Using Machine Learning
 description: In this project, we use the Random Forest Regression Algorithm to predict missing customer loyalty score data...
 image: "/posts/customer-loyalty.jpeg"
 tags: [Customer Loyalty, Machine Learning, Regression, Python]
@@ -174,7 +174,7 @@ ___
 <br>
 # Linear Regression <a name="linreg-title"></a>
 
-We utlise the scikit-learn library within Python to model our data using Linear Regression. The code sections below are broken up into 4 key sections:
+We use the scikit-learn library within Python to model our data using Linear Regression. The code sections below are broken up into 4 key sections:
 
 * Data Import
 * Data Preprocessing
