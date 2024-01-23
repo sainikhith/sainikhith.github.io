@@ -54,7 +54,7 @@ As we are predicting a numeric output for our loyalty score, we tested three reg
 Our testing found that the Random Forest approach gave us the highest predictive accuracy.
 
 <br>
-**Metric 1: <span title="Between 0 and 1.  The closer to 1, the more accurate the model.  Adjusted for multiple predictor variables.">Adjusted R-Squared (Test Set)</span>**
+**Metric 1: <span title="A value etween 0 and 1 indicating how well the model predicts the output.  The closer to 1, the more accurate the model.  Adjusted for multiple predictor variables.">Adjusted R-Squared (Test Set)</span>**
 
 * Random Forest = 0.955
 * Decision Tree = 0.886
@@ -86,6 +86,12 @@ Example 1: Customer X has a total grocery spend of $100 and all of this is spent
 Example 2: Customer Y has a total grocery spend of $200 but only 20% is spent with our client.  The remaining 80% is spent with competitors.  Customer Y has a *customer loyalty score* of 0.2
 <br>
 <br>
+
+The *R Squared* metric, also known as the coefficient of determination, tells us how well our model predicts the output variable (loyalty score in our case).  It compares the accuracy of the predicted scores of our test dataset against just guessing the average of the known data points (using the average score of the customers where we know the loyalty score).  It's a number between 0 and 1, and the nearer to 1 it is, the better the accuracy of its predictions.
+
+Example: If your machine learning model, with the input variables you give it to learn from, let's say, the distance they live from your shop, has an R-Squared of 0.85, it means that this model explains 85% of your customer's loyalty score.  It is likely that something else about your customer, that you perhaps do not know from your database, is responsible for explaining the other 15%.
+
+If you were to get an R-Squared score of 1, it means your model perfectly predicts your customer's loyalty score every time.
 ___
 
 # Data Overview  <a name="data-overview"></a>
