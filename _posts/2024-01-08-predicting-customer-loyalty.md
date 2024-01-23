@@ -26,22 +26,22 @@ tags: [Customer Loyalty, Machine Learning, Regression, Python]
 ___
 
 # Project Overview  <a name="overview-main"></a>
-Our client, a grocery retailer, hired a market research consultancy to append market-level customer loyalty information to the database.  However, only around 50% of the client's customer base could be tagged, thus the other half did not have this information present.  In this project, we will use Machine Learning to solve this, and predict the missing loyalty scores!
+A grocery retailer hired a market research consultancy to append market-level customer loyalty information to the database.  However, only around 50% of the client's customer base could be tagged, thus the other half did not have this information present.  In this project, we will use Machine Learning to solve this, and predict the missing loyalty scores!
 
 ### Context <a name="overview-context"></a>
 
 Our client, a grocery retailer, hired a market research consultancy to append market-level customer loyalty information to the database.  However, only around 50% of the client's customer base could be tagged, thus the other half did not have this information present.
 
-The overall aim of this work is to accurately predict the *loyalty score* for those customers who could not be tagged, enabling our client a clear understanding of true customer loyalty, regardless of total spend volume - and allowing for more accurate and relevant customer tracking, targeting, and comms.
+The overall aim of this project is to accurately predict the *loyalty score* for those customers who could not be tagged, enabling our client a clear understanding of true customer loyalty, regardless of total spend volume - and allowing for more accurate and relevant customer tracking, targeting, and communications.
 
-To achieve this, we looked to build out a predictive model that will find relationships between customer metrics and *loyalty score* for those customers who were tagged, and use this to predict the loyalty score metric for those who were not.
+To achieve this, we looked to build a predictive model that will find relationships between customer metrics from our client's database, and *loyalty score* for those customers who were tagged, and use this to predict the loyalty score metric for those who were not, as well as to assess the accuracy of our predictive model.
 <br>
 <br>
 ### Actions <a name="overview-actions"></a>
 
-We first needed to compile the necessary data from tables in the database, gathering key customer metrics that may help predict *loyalty score*, appending on the dependent variable, and separating out those who did and did not have this dependent variable present.
+We first needed to compile the necessary data from tables in the database, gathering key customer metrics that may help us predict the *loyalty score*.  Including the dependent variable, the loyalty score, where we had it, and separating out the customer records that did and did not have this variable present.
 
-As we are predicting a numeric output, we tested three regression modelling approaches, namely:
+As we are predicting a numeric output for our loyalty score, we tested three regression modelling approaches, to determine which would give us the best predictive accuracy, namely:
 
 * Linear Regression
 * Decision Tree
@@ -51,10 +51,10 @@ As we are predicting a numeric output, we tested three regression modelling appr
 
 ### Results <a name="overview-results"></a>
 
-Our testing found that the Random Forest had the highest predictive accuracy.
+Our testing found that the Random Forest approach gave us the highest predictive accuracy.
 
 <br>
-**Metric 1: Adjusted R-Squared (Test Set)**
+**Metric 1: <span title="Between 0 and 1.  The closer to 1, the more accurate the model.  Adjusted for multiple predictor variables.">Adjusted R-Squared (Test Set)</span>**
 
 * Random Forest = 0.955
 * Decision Tree = 0.886
@@ -384,7 +384,7 @@ The below code then produces a plot that visualises the cross-validated accuracy
 
 ```python
 
-plt.style.use('seaborn-poster')
+plt.style.use('seaborn-v0_8-poster')
 plt.plot(range(1, len(fit.cv_results_['mean_test_score']) + 1), fit.cv_results_['mean_test_score'], marker = "o")
 plt.ylabel("Model Score")
 plt.xlabel("Number of Features")
