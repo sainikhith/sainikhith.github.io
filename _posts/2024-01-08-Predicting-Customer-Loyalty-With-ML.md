@@ -61,7 +61,7 @@ Our testing found that the Random Forest approach gave us the highest predictive
 * Linear Regression = 0.754
 
 <br>
-**Metric 2: R-Squared (K-Fold Cross Validation, k = 4)**
+**Metric 2: R-Squared (<span title="A method of cross validation where the data is split into K=4 equal groups, and the model is trained and tested 4 times, using a different group for testing each time, and training on all the other groups.  The accuracy is then averaged over all 4 evalulations, to give us an idea of how well the model would do on unseen data.">K-Fold Cross Validation, k = 4</span>)**
 
 * Random Forest = 0.925
 * Decision Tree = 0.871
