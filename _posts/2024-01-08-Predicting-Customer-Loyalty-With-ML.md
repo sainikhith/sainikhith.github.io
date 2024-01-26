@@ -34,16 +34,16 @@ Our client, a grocery retailer, hired a market research consultancy to append ma
 
 The overall aim of this project is to accurately predict the *loyalty score* for those customers who could not be tagged, enabling our client to have a clear understanding of true customer loyalty of their entire customer base, regardless of total spend volume, and allowing for more accurate and relevant customer tracking, targeting, and communications.
 
-To achieve this, we looked to build a predictive model that will find relationships between customer metrics from our client's database, and *loyalty score* for those customers who were tagged. We "train" our model using part of the tagged customer data, and then once it is "trained" we test the accuracy of the model on new data by comparing the predicted scores against the actual scores in the rest of the tagged data.  
+To achieve this, we looked to build a predictive model that will find relationships between customer metrics from our client's database, and *loyalty score* for those customers who were tagged. We "train" our model using part of the tagged customer data, which we call the *training set* and then once it is "trained" we test the accuracy of the model on new data by comparing the predicted scores against the actual scores in the rest of the tagged data, which we call the *test set*.  
 
-Once we have a trained and tested model whose accuracy we are happy with, we can use it to predict the loyalty score metric for those customers who were not already tagged, with a good understanding of the confidence we should have in our predicted values.
+Once we have a trained and tested model whose accuracy we are happy with, we can use it to predict the loyalty score metric for those customers who were not already tagged, with a good understanding of the level of confidence we should have in our predicted values.
 <br>
 <br>
 ### Actions <a name="overview-actions"></a>
 
-We first needed to compile the necessary data from tables in the database, gathering key customer metrics that may help us predict the *loyalty score*.  Including the dependent variable, the loyalty score, where we had it, and separating out the customer records that did and did not have this variable present.
+We first needed to compile the necessary data from tables in the database, gathering key customer metrics that we suspected may help us predict the *loyalty score*.  We created one dataset including the dependent variable, the loyalty score, where we had it, and a separate dataset for the customer records that did not have the loyalty score present.
 
-As we are predicting a numeric output for our loyalty score, we tested three regression modelling approaches, to determine which would give us the best predictive accuracy, namely:
+As we were predicting a numeric output for our loyalty score, we tested three *regression modeling* approaches, to determine which would give us the best predictive accuracy, namely:
 
 * Linear Regression
 * Decision Tree
@@ -56,14 +56,14 @@ As we are predicting a numeric output for our loyalty score, we tested three reg
 Our testing found that the Random Forest approach gave us the highest predictive accuracy.
 
 <br>
-**Metric 1: <span title="A value etween 0 and 1 indicating how well the model predicts the output.  The closer to 1, the more accurate the model.  Adjusted for multiple predictor variables.">Adjusted R-Squared (Test Set)</span>**
+**Metric 1: <span title="A value between 0 and 1 indicating how well the model predicts the output variable.  The closer to 1, the more accurate the model.  Adjusted for multiple predictor variables.">Adjusted R-Squared (Test Set)</span>**
 
 * Random Forest = 0.955
 * Decision Tree = 0.886
 * Linear Regression = 0.754
 
 <br>
-**Metric 2: R-Squared (<span title="A method of cross validation where the data is split into K=4 equal groups, and the model is trained and tested 4 times, using a different group for testing each time, and training on all the other groups.  The accuracy is then averaged over all 4 evalulations, to give us an idea of how well the model would do on unseen data.">K-Fold Cross Validation, k = 4</span>)**
+**Metric 2: R-Squared (<span title="A method of cross-validation where the data is split into K=4 equal groups, and the model is trained and tested 4 times, using a different group for testing each time, and training on all the other groups.  The accuracy is then averaged over all 4 evalulations, to give us an idea of how well the model would do on unseen data.">K-Fold Cross Validation, k = 4</span>)**
 
 * Random Forest = 0.925
 * Decision Tree = 0.871
@@ -74,9 +74,9 @@ As the most important outcome for this project was predictive accuracy, rather t
 <br>
 ### Growth/Next Steps <a name="overview-growth"></a>
 
-While predictive accuracy was relatively high - other modelling approaches could be tested, especially those somewhat similar to Random Forest, for example, XGBoost, LightGBM to see if even more accuracy could be gained.
+While predictive accuracy was relatively high in our final model, other modeling approaches could be tested, especially those somewhat similar to Random Forest, for example, XGBoost, LightGBM to see if even more accuracy could be gained.
 
-From a data point of view, further variables could be collected, and further feature engineering could be undertaken to ensure that we have as much useful information available for predicting customer loyalty
+From a data point of view, further variables could be collected, and further feature engineering could be undertaken to ensure that we have as much useful information available for predicting customer loyalty as realistically possible.
 <br>
 <br>
 ### Key Definition  <a name="overview-definition"></a>
@@ -87,22 +87,20 @@ Example 1: Customer X has a total grocery spend of $100 and all of this is spent
 
 Example 2: Customer Y has a total grocery spend of $200 but only 20% is spent with our client.  The remaining 80% is spent with competitors.  Customer Y has a *customer loyalty score* of 0.2
 <br>
-<br>
+The R-squared metric, also known as the coefficient of determination, tells us how well our model predicts the output variable (loyalty score in our case).  It compares the accuracy of the predicted scores of our test dataset against just guessing the average of the known data points (using the average score of the customers where we know the loyalty score).  It's a number between 0 and 1, and the nearer to 1 it is, the better the accuracy of its predictions.
 
-The *R Squared* metric, also known as the coefficient of determination, tells us how well our model predicts the output variable (loyalty score in our case).  It compares the accuracy of the predicted scores of our test dataset against just guessing the average of the known data points (using the average score of the customers where we know the loyalty score).  It's a number between 0 and 1, and the nearer to 1 it is, the better the accuracy of its predictions.
+Example: Let's say you identify some input variables about the customers that you suspect might be relevant to their loyalty score; for instance, the distance they live from the shop.  If your machine learning model, with these input variables, has an R-squared of 0.85, it means that this model, with this input data, explains 85% of your customer's loyalty score.  It is likely that something else about your customer, that you perhaps do not know from your database, is responsible for explaining the other 15%.
 
-Example: If your machine learning model, with the input variables you give it to learn from, let's say, the distance they live from your shop, has an R-Squared of 0.85, it means that this model explains 85% of your customer's loyalty score.  It is likely that something else about your customer, that you perhaps do not know from your database, is responsible for explaining the other 15%.
-
-If you were to get an R-Squared score of 1, it means your model perfectly predicts your customer's loyalty score every time.
+If you were to get an R-squared score of 1, it means your model perfectly predicts your customer's loyalty score every time.  In practice, this usually means you've made a mistake, and maybe trained your model on your test data set!
 ___
 
 # Data Overview  <a name="data-overview"></a>
 
 We will be predicting the *loyalty_score* metric.  This metric exists (for half of the customer base) in the *loyalty_scores* table of the client database.
 
-The key variables hypothesised to predict the missing loyalty scores will come from the client database, namely the *transactions* table, the *customer_details* table, and the *product_areas* table.
+The key variables we believe might help to predict the missing loyalty scores will come from the client database, namely the *transactions* table, the *customer_details* table, and the *product_areas* table.
 
-Using pandas in Python, we merged these tables for all customers, creating a single dataset that we can use for modelling.
+Using pandas in Python, we merged these tables for all customers, creating a single flat dataset that we can use for modeling.
 
 ```python
 
@@ -148,7 +146,7 @@ pickle.dump(regression_scoring, open("data/customer_loyalty_scoring.p", "wb"))
 
 ```
 <br>
-After this data pre-processing in Python, we have a dataset for modelling that contains the following fields...
+After this data pre-processing in Python, we have a dataset for modeling that contains the following fields...
 <br>
 <br>
 
@@ -168,11 +166,11 @@ ___
 <br>
 # Modelling Overview
 
-We will build a model that looks to accurately predict the “loyalty_score” metric for those customers that were able to be tagged, based upon the customer metrics listed above.
+We built a model that aimed to accurately predict the “loyalty_score” metric for those customers that *were* able to be tagged, based upon the customer metrics listed above, so that we could test the accuracy of its predictions.
 
-If that can be achieved, we can use this model to predict the customer loyalty score for the customers who were unable to be tagged by the agency.
+If a good level of accuracy could be achieved, we could move forward with confidence and use this model to predict the customer loyalty score for the customers who *were unable* to be tagged by the agency.
 
-As we are predicting a numeric output, we tested three regression modelling approaches, namely:
+As we were predicting a numeric output, we tested three popular *regression modeling* approaches, namely:
 
 * Linear Regression
 * Decision Tree
@@ -182,7 +180,7 @@ ___
 <br>
 # Linear Regression <a name="linreg-title"></a>
 
-We use the scikit-learn library within Python to model our data using Linear Regression. The code sections below are broken up into 4 key sections:
+We use the *scikit-learn* library within Python to model our data using Linear Regression. The code sections below are broken up into 4 key sections:
 
 * Data Import
 * Data Preprocessing
@@ -192,7 +190,7 @@ We use the scikit-learn library within Python to model our data using Linear Reg
 <br>
 ### Data Import <a name="linreg-import"></a>
 
-Since we saved our modelling data as a pickle file, we import it.  We ensure we remove the id column, and we also ensure our data is shuffled.
+Since we saved our modeling data as a pickle file earlier, we just had to import it.  We ensured we removed the customer ID column, as we believed this would be unlikely to have any meaningful bearing on customer loyalty scores. We also ensured our data was shuffled before splitting it into test and training sets, so that any inherent bias from the data ordering would be evenly split across the test and training data sets.
 
 ```python
 
@@ -230,7 +228,7 @@ For Linear Regression we have certain data preprocessing steps that need to be a
 <br>
 ##### Missing Values
 
-The number of missing values in the data was extremely low, so instead of applying any imputation (i.e. mean, most common value) we will just remove those rows
+The number of missing values in the input data was extremely low, so instead of applying any *imputation* (i.e. filling in the blanks with the mean, or most common value for that variable) we will just remove those rows from our dataset.
 
 ```python
 
@@ -241,7 +239,8 @@ data_for_model.dropna(how = "any", inplace = True)
 ```
 
 <br>
-##### OutliersThe ability of a Linear Regression model to generalise well across *all* data can be hampered if there are outliers present.  There is no right or wrong way to deal with outliers, but it is always something worth very careful consideration - just because a value is high or low, does not necessarily mean it should not be there!
+##### Outliers
+The ability of a Linear Regression model to generalise well across *all* data can be hampered if there are outliers present in the input data.  There is no right or wrong way to deal with outliers, but it is always something worth very careful consideration - just because a value is high or low, does not necessarily mean it should not be there!  
 
 In this code section, we use **.describe()** from Pandas to investigate the spread of values for each of our predictors.  The results of this can be seen in the table below.
 
@@ -258,13 +257,13 @@ In this code section, we use **.describe()** from Pandas to investigate the spre
 | max | 44.37 | 0.88 | 9878.76 | 1187.00 | 109.00 | 5.00 | 102.34 |
 
 <br>
-Based on this investigation, we see some *max* column values for several variables to be much higher than the *median* value.
+Based on this investigation, we see some *max* column values for several variables to be much higher than the *median* value (at 50% in the table above).
 
 This is for columns *distance_from_store*, *total_sales*, and *total_items*
 
 For example, the median *distance_to_store* is 1.645 miles, but the maximum is over 44 miles!
 
-Because of this, we apply some outlier removal in order to facilitate generalisation across the full dataset.
+Because of this, we apply some outlier removal techniques in order to facilitate generalisation across the full dataset.
 
 We do this using the "boxplot approach" where we remove any rows where the values within those columns are outside of the interquartile range multiplied by 2.
 
@@ -317,15 +316,15 @@ In our dataset, we have one categorical variable *gender* which has values of "M
 
 The Linear Regression algorithm can't deal with data in this format as it can't assign any numerical meaning to it when looking to assess the relationship between the variable and the dependent variable.
 
-As *gender* doesn't have any explicit *order* to it, in other words, Male isn't higher or lower than Female and vice versa - one appropriate approach is to apply One Hot Encoding to the categorical column.
+As *gender* doesn't have any explicit *order* to it, in other words, Male isn't higher or lower than Female and vice versa - one appropriate approach is to apply a technique called *One Hot Encoding* to the categorical column.
 
 One Hot Encoding can be thought of as a way to represent categorical variables as binary vectors, in other words, a set of *new* columns for each categorical value with either a 1 or a 0 saying whether that value is true or not for that observation.  These new columns would go into our model as input variables, and the original column is discarded.
 
-We also drop one of the new columns using the parameter *drop = "first"*.  We do this to avoid the *dummy variable trap* where our newly created encoded columns perfectly predict each other - and we run the risk of breaking the assumption that there is no multicollinearity, a requirement or at least an important consideration for some models, Linear Regression being one of them! Multicollinearity occurs when two or more input variables are *highly* correlated with each other, it is a scenario we attempt to avoid, as in short, while it won't necessarily affect the predictive accuracy of our model, it can make it difficult to trust the statistics around how well the model is performing, and how much each input variable is truly having.
+We also drop one of the new columns using the parameter *drop = "first"*.  We do this to avoid the *dummy variable trap* where our newly created encoded columns perfectly predict each other - and we run the risk of breaking the assumption that there is no multicollinearity, a requirement or at least an important consideration for some models, Linear Regression being one of them! Multicollinearity occurs when two or more input variables are *highly* correlated with each other, it is a scenario we attempt to avoid, because, while it won't necessarily affect the predictive accuracy of our model, it can make it difficult to trust the statistics around how well the model is performing, and how much each input variable is truly having.
 
-In the code, we also make sure to apply *fit_transform* to the training set, but only *transform* to the test set.  This means the One Hot Encoding logic will *learn and apply* the "rules" from the training data, but only *apply* them to the test data.  This is important in order to avoid *data leakage* where the test set *learns* information about the training data, and means we can't fully trust model performance metrics!
+In the code, we also make sure to apply *fit_transform* to the training set, but only *transform* to the test set.  This means the One Hot Encoding logic will *learn and apply* the "rules" from the training data, but only *apply* them to the test data.  This is important, in order to avoid *data leakage* where the test set *learns* information about the training data, and would mean we can't fully trust the model performance metrics!
 
-For ease, after we have applied One Hot Encoding, we turn our training and test objects back into Pandas Dataframes, with the column names applied.
+For ease of inspection, after we have applied One Hot Encoding, we turn our training and test objects back into Pandas Dataframes, with the column names applied.
 
 <br>
 ```python
