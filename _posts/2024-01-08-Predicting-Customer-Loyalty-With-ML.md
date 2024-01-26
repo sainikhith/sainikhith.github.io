@@ -26,15 +26,17 @@ tags: [Customer Loyalty, Machine Learning, Regression, Python]
 ___
 
 # Project Overview  <a name="overview-main"></a>
-A grocery retailer hired a market research consultancy to append market-level customer loyalty information to the database.  However, only around 50% of the client's customer base could be tagged, thus the other half did not have this information present.  In this project, we will use Machine Learning to solve this, and predict the missing loyalty scores!
+A grocery retailer hired a market research consultancy to append market-level customer loyalty information to the database.  However, only around 50% of the client's customer base could be tagged, so the other half did not have this information present.  In this project, we will use Machine Learning to solve this, and predict the missing loyalty scores!
 
 ### Context <a name="overview-context"></a>
 
-Our client, a grocery retailer, hired a market research consultancy to append market-level customer loyalty information to the database.  However, only around 50% of the client's customer base could be tagged, thus the other half did not have this information present.
+Our client, a grocery retailer, hired a market research consultancy to append market-level customer loyalty information to their database.  However, only around 50% of the client's customer base could be tagged, the other half did not have this information present.
 
-The overall aim of this project is to accurately predict the *loyalty score* for those customers who could not be tagged, enabling our client a clear understanding of true customer loyalty, regardless of total spend volume - and allowing for more accurate and relevant customer tracking, targeting, and communications.
+The overall aim of this project is to accurately predict the *loyalty score* for those customers who could not be tagged, enabling our client to have a clear understanding of true customer loyalty of their entire customer base, regardless of total spend volume, and allowing for more accurate and relevant customer tracking, targeting, and communications.
 
-To achieve this, we looked to build a predictive model that will find relationships between customer metrics from our client's database, and *loyalty score* for those customers who were tagged, and use this to predict the loyalty score metric for those who were not, as well as to assess the accuracy of our predictive model.
+To achieve this, we looked to build a predictive model that will find relationships between customer metrics from our client's database, and *loyalty score* for those customers who were tagged. We "train" our model using part of the tagged customer data, and then once it is "trained" we test the accuracy of the model on new data by comparing the predicted scores against the actual scores in the rest of the tagged data.  
+
+Once we have a trained and tested model whose accuracy we are happy with, we can use it to predict the loyalty score metric for those customers who were not already tagged, with a good understanding of the confidence we should have in our predicted values.
 <br>
 <br>
 ### Actions <a name="overview-actions"></a>
