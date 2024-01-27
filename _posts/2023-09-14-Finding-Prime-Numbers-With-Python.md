@@ -9,10 +9,12 @@ tags: [Python, Primes]
 # Project Overview  <a name="overview-main"></a>
 
 ## Introduction
-In this post I'm going to run through creating a function in Python that can quickly find all the Prime numbers below a given value.  
+
+In this post, I'm going to run through creating a function in Python that can quickly find all the Prime numbers below a given value.  
 I've created this project to demonstrate the use of some basic Python functionality and data types in a simple mathematical problem.  
 
-### Why python?
+### Why Python?
+
 There are a few good reasons for using Python to solve mathematical problems like this:  
 
 * Python has simple and clean syntax that makes it easy to write and understand code. This is important for a maths-heavy algorithm like prime number calculations.
@@ -25,7 +27,9 @@ Of course, many other languages like C, C++, R, Rust, Julia etc would also work.
 > REPL stands for Read Evaluate Print and Loop.  It basically means you can interactively run parts of your python code and see the  results, while you're still developing it.  You don't have to finish it and fix all the syntax errors so it compiles before you can see if you have a problem with your approach.  This was a new concept for me, but I like it.
 
 ---
+
 ### What is a prime number?
+
 A prime number is a whole number greater than 1 that can only be divided evenly by 1 and itself to produce a whole number. For example, 5 is a prime number because it can only be divided evenly by 1 and 5. It cannot be divided evenly by any other whole numbers.
 
 Some key things about prime numbers:
@@ -33,51 +37,59 @@ Some key things about prime numbers:
 * They have exactly 2 factors - 1 and the number itself. For example, the only factors of 5 are 1 and 5.
 * 2 is the only even prime number. All other prime numbers are odd.
 * There is no highest prime number. We can keep finding larger and larger prime numbers forever.  This was proved by Euclid among others and you can read about it here if you want to.  https://en.wikipedia.org/wiki/Euclid%27s_theorem.  I'm not going to argue with them.
-* Prime numbers get more spread out as the numbers get larger. For small numbers there are lots of primes, but for very big numbers you have to look farther to find the next prime.
+* Prime numbers get more spread out as the numbers get larger. For small numbers, there are lots of primes, but for very big numbers you have to look farther to find the next prime.
 * Prime numbers are important in many areas of maths and encryption. But at a basic level, they are just numbers that can only be evenly divided by themselves and 1.
 
-So in simple terms, a prime number is a lone wolf - it can't be evenly split into smaller whole number groups. It's only divisible by itself and 1. This makes primes the atoms of the mathematics world. 
+So in simple terms, a prime number is a lone wolf - it can't be evenly split into smaller whole-number groups. It's only divisible by itself and 1. This makes primes the atoms of the mathematics world. 
 
 ---
+
 ## Context
+
 Our objective is to create a function in Python that can quickly find all the Prime numbers below a given value.  For example, if I passed the function a value of 100, it would find all the prime numbers below 100.
+
 ---
+
 ## Actions
 
 In order to approach this problem we go through the following stages.
 
-* First we think through the logical algorithm we're going to try to implement, so we have our approach to the problem clear in our minds.
-* We have a look at the language data types and elements of Python that could be useful to us in solving this problem.  In this case we explore the *pop()* function, and the *list* and *set* data types in particular.
+* First, we think through the logical algorithm we're going to try to implement, so we have our approach to the problem clear in our minds.
+* We have a look at the language data types and elements of Python that could be useful to us in solving this problem.  In this case, we explore the *pop()* function, and the *list* and *set* data types in particular.
 * We use the REPL to interactively test out parts of our code as we build it, to ensure we are getting the results and data types we expect.  This mitigates somewhat the fact that Python is a weakly typed language, and the development environment therefore will not spot type errors until they bite us at run-time.
 * We build our function
 * We test our function, for both accuracy and performance on higher volumes, since we are interested in how quickly we can get Python to do this.
 * We identify and resolve problems, iterating the solution until we are happy with it.
 
 ---
+
 ## Results
+
 We find that, on my machine, it is possible to accurately identify prime numbers up to 1,000,000 in less than a second, using only core Python data types and functionality.
 
 We also did some basic quick visualisation using Excel to see the way the incidence of prime numbers tails off by data range as you get higher.  This can be seen in the image above, where we see that there are more primes in the range of 1 - 2501 than in subsequent number ranges, but that this decrease becomes more gradual as you head up towards 100,000.  This is consistent with Euclid's proof that there is no maximum prime number!
 
 ---
+
 # Project Detail  <a name="project-detail"></a>
 
-## design approach <a name="design-approach"></a>
-We want to create a function that answers the question "what are all the primes up to a certain number, specified by the  caller.", that returns a list of the prime numbers to the user.  We also want this to happen as quickly as we can.
+## Design Approach <a name="design-approach"></a>
+
+We want to create a function that answers the question "What are all the primes up to a certain number, specified by the caller.", that returns a list of the prime numbers to the user.  We also want this to happen as quickly as we can.
 
 We know the smallest true Prime number is 2.  We are going to create a list of all numbers that we need to check, which will be every integer between 2 and our upper bound which in this case was 20. 
 
-Instead of using a list in Python, though, we're going to try to use a set.  The python set datatype has a lot of functions that support set theory mathematics.  It includes support for operations on sets such as intersections, unions and differences.  Using sets will allow us to eliminate non-primes quickly during our search, and massively speed it up. We are going to look at how fast we can calculate our primes, so we'll use the time library to time our function. 
+Instead of using a list in Python, though, we're going to try to use a set.  The Python set datatype has a lot of functions that support set theory mathematics.  It includes support for operations on sets such as intersections, unions and differences.  Using sets will allow us to eliminate non-primes quickly during our search, and massively speed it up. We are going to look at how fast we can calculate our primes, so we'll use the time library to time our function. 
 
 We will return any primes we discover from our function.
 
 ---
 
-## algorithm <a name="algorithm"></a>
+## Algorithm <a name="algorithm"></a>
 
 We're going to use a loop to iterate through our set and check for primes, but before we construct the function code I find it can be valuable to think through the logical approach first.  Here is our rough algorithm.
 
-```ruby
+```python
 Capture the primes limit that we are going to check up to.  
 Create a list of numbers to check, between 2 and the primes limit, inclusively.  
 
@@ -92,19 +104,22 @@ while we still have numbers remaining in our list:
 Calculate summary data.  
 Return the list of primes found to the caller.  
 ```
+
 ---
-## implementation <a name="implementation"></a>
+
+## Implementation <a name="implementation"></a>
 
 In this step we will start putting the Python code together, and using the REPL, we can test each part as we go through, to make sure it is giving us the results we expect.
 
-We start with a set of numbers (lets call them prime_suspects) to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it.
+We start with a set of numbers (let's call them prime_suspects) to check all integers between 2 and 20. Let's extract the first number from that set that we want to check as to whether it's a prime. When we check the value we're going to check if it is a prime...if it is, we're going to add it to our list called primes_list...if it isn't a prime we don't want to keep it.
 
-There is a method which will remove an element from a list or set and provide that value to us, and that method is called *pop*
+There is a method that will remove an element from a list or set and provide that value to us, and that method is called *pop*
 
 If we use pop, and assign this to the object called **prime** it will *pop* the first element from the set out of **prime_suspects**, and into **prime**
 
 Let's use the REPL to explore our design and see this part working.
-```ruby
+
+```python
 # First lets take a look what's in our numbers to check set
 print(prime_suspects)
 >>> {2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
@@ -123,9 +138,9 @@ Now, we know that the very first value in our range is going to be a prime, as t
 
 Now we're going to use some set functionality to check our remaining prime_suspects for non-primes, based on the prime we just found. For our prime number (in this first case it was the number 2) we want to generate a set of all the multiples of that up to our upper range (in our case, 20).
 
-This is the reason we are using a set rather than a list, because it allows us some special functionality that we'll use in a minute, to quickly eliminate non primes from our set of numbers to check, and which is essential to the magic of this approach.
+This is the reason we are using a set rather than a list, because it allows us some special functionality that we'll use in a minute, to quickly eliminate non-primes from our set of numbers to check which is essential to the magic of this approach.
 
-```ruby
+```python
 multiples = set(range(prime*2, primes_limit+1, prime))
 ```
 
@@ -135,14 +150,14 @@ For the stopping point of our range - we specify that we want our range to go up
 
 Now, the **step** is key here.  We want multiples of our number, so we want to increment in steps *of our* number so we can put in **prime** here
 
-Lets have a look at our list of multiples...
+Let's have a look at our list of multiples...
 
-```ruby
+```python
 print(multiples)
 >>> {4, 6, 8, 10, 12, 14, 16, 18, 20}
 ```
 
-The next part is the magic I spoke about earlier, we're using the special set functionality **difference_update** which removes any values from our number range that are multiples of the number we just checked. The reason we're doing this is because if a number is a multiple of anything other than 1 or itself then it is **not a prime number** and can remove it from the list to be checked.  Hopefully this will give us a much faster process than checking each number in the original list!
+The next part is the magic I spoke about earlier, we're using the special set functionality **difference_update** which removes any values from our number range that are multiples of the number we just checked. The reason we're doing this is because if a number is a multiple of anything other than 1 or itself then it is **not a prime number** and can remove it from the list to be checked.  Hopefully, this will give us a much faster process than checking each number in the original list!
 
 Before we apply the **difference_update**, let's look at our two sets.
 
@@ -150,7 +165,7 @@ Before we apply the **difference_update**, let's look at our two sets.
 
 To use this, we put our initial set and then apply the difference update with our multiples:
 
-```ruby
+```python
 # lets see what's in our set to start with.
 print(prime_suspects)
 >>> {3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20}
@@ -171,11 +186,13 @@ When we look at our number range now, all values that were also present in the m
 This is very cool!  We've made a massive reduction to the pool of numbers that need to be tested so this is really efficient. It also means the smallest number in our range *is definitely a prime number* as we know nothing smaller than it divides into it, and this means we can run all that logic again in a loop until we run out of numbers to check.
 
 ---
-### first iteration <a name="first-iteration"></a>
-Here is the version 1 function based on our rough design, with a while loop doing the hard work of updated the number list and extracting primes until the list is empty.
-we are also going to use the time functionality in python to time our function on various limits to see how fast our algorithm is!
 
-```ruby
+### first iteration <a name="first-iteration"></a>
+
+Here is the version 1 function based on our rough design, with a while loop doing the hard work of updated the number list and extracting primes until the list is empty.
+we are also going to use the time functionality in Python to time our function on various limits to see how fast our algorithm is!
+
+```python
 import time
 
 # we'll create a function that accepts the primes limit as the upper bound of primes to find.  We will give it a default of 20.
@@ -213,18 +230,21 @@ def find_primes_under(primes_limit=20):
 
     return primes_list
 ```
+
 ---
+
 ### testing version 1
+
 Let's call the function and print the primes_list to have a look at what we found!
 
-```ruby
+```python
 primes_list = find_primes_under()
 print(primes_list)
 ```
 
 So this is what we get.
 
-```ruby
+```python
 >>> There are 8 prime numbers between 0 and 20.
 >>> The largest prime is 19.
 >>> The calculation took 0.0 seconds.
@@ -234,7 +254,7 @@ So this is what we get.
 
 Let's now try calling the function with some bigger numbers!
 
-```ruby
+```python
 primes_list = find_primes_under(100)
 print(primes_list)
 
@@ -244,9 +264,10 @@ print(primes_list)
 >>> [2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97]
 
 ```
+
 Still pretty quick! Let's give it a bit more of a challenge, and try to find primes up to 100000
 
-```ruby
+```python
 primes_list = find_primes_under(100000)
 
 >>> There are 9592 prime numbers between 0 and 100000.
@@ -254,10 +275,11 @@ primes_list = find_primes_under(100000)
 >>> The calculation took 0.03126120567321777 seconds.
 
 ```
+
 Awesome! It found 99991 prime numbers between 2 and 100,000 in a tiny fraction of a second! 
 Let's go for something really large, say a million...
 
-```ruby
+```python
 find_primes_under(1000000)
 
 >>> There are 78498 prime numbers between 0 and 1000000.
@@ -268,45 +290,50 @@ find_primes_under(1000000)
 That is pretty cool, and super quick!  We are very excited and proud of our solution!  But you know what they say about pride...
 
 ---
-### houston, we have a problem!
-But wait!  While this is all working perfectly on my machine, and passing every test I run, we actually have a problem with the python code, and this is a sneaky one that could cause another developer, or future-me, a massive headache!  
 
-#### the symptoms  
+### Houston, we have a problem!
+
+But wait!  While this is all working perfectly on my machine, and passing every test I run, we actually have a problem with the Python code, and this is a sneaky one that could cause another developer, or future-me, a massive headache!  
+
+#### the symptoms 
+
 We have reports that, while most of the time everything works perfectly, occasionally people are getting the wrong results from our function!  Sometimes the list of returned 'Primes' contains the odd rogue number which is not a prime at all! What is going on?
 
-I try, but cannot replicate it on my machine. I run tests, I debug through the code. It's all working great for me!  So to solve this intermittent problem we need to look again at the code in our function, and question our assumptions.  
+I try, but cannot replicate it on my machine. I run tests, I debug through the code. It's all working great for me!  So to solve this intermittent problem we need to look again at the code in our function and question our assumptions.  
 
 ---
 #### using pop() on a set in python
 
-It turns out we have a code-smell in our code.  We can't rely on using the pop() method on a set to give us the minimum number, because a set in python is un-ordered by definition.  That means, pop() *could* randomly select any value from the set.  In practice, at least on my machine with my setup, it appears to be consistently extracting the lowest element of the set.  However, we cannot rely on this!
+It turns out we have a code-smell in our code.  We can't rely on using the pop() method on a set to give us the minimum number, because a set in Python is un-ordered by definition.  That means, pop() *could* randomly select any value from the set.  In practice, at least on my machine with my setup, it appears to be consistently extracting the lowest element of the set.  However, we cannot rely on this!
 
 The items are stored internally with some order, but this internal order is determined by the hash code of the key (which is what allows retrieval to be so fast). 
 
 This hashing method means that we can't 100% rely on it successfully getting the lowest value every time. In very rare cases, the hash provides a value that is not the lowest.  And as our super-performant prime-finding algorithm relies on pop() selecting the lowest value in the set, this can result in a rogue non-prime value being occasionally added to our list of primes!
 
-Even though here, we're just coding up something for fun - this is most definitely a useful thing to note when using Sets and pop() in Python in the future!  In fact this applies to other functions that for whatever reason are allowed on Sets, but they do not work reliably because of the unordered nature of them.  
+Even though here, we're just coding up something for fun - this is most definitely a useful thing to note when using Sets and pop() in Python in the future!  In fact, this applies to other functions that for whatever reason are allowed on Sets, but they do not work reliably because of their unordered nature.  
 
-These include the *min()* and *max()* functions in Python, and this I feel is even worse than the *pop()* situation, since the name of these two functions clearly implies that they will find the minimum or maximum value of a Set, and since Python allows you to call them on a Set, with no code warnings, you could be forgiven for believing this, but they suffer from exactly the same problem as pop()!  The min function will not always find you the minimum value, and the max function will not always find you the maximum value of an un-ordered set!  You've got to wonder why this is allowed in the language!  Still, we are where we are - just be warned!  
+These include the *min()* and *max()* functions in Python, and this I feel is even worse than the *pop()* situation, since the name of these two functions clearly implies that they will find the minimum or maximum value of a Set, and since Python allows you to call them on a Set, with no code warnings, you could be forgiven for believing this, but they suffer from exactly the same problem as pop()!  The *min* function will not always find you the minimum value, and the max function will not always find you the maximum value of an un-ordered set!  You've got to wonder why this is allowed in the language!  Still, we are where we are - just be warned!  
 
 The simplest solution to force the minimum value to be used is to replace the line...
 
-```ruby
+```python
 prime = prime_suspects.pop()
 ```
 
 ...with the lines...
 
-```ruby
+```python
 prime = min(sorted(prime_suspects))
 prime_suspects.remove(prime)
 ```
 
 ---
-## solution version 2
+
+## Solution version 2
+
 Here is the new function, where we sort the set data before finding the minimum value and removing it from the set:
 
-```ruby
+```python
 def find_primes_under(primes_limit=20):
     start = time.time()
     range_limit = primes_limit + 1
@@ -338,10 +365,12 @@ def find_primes_under(primes_limit=20):
 ```
 
 ---
-### testing solution version 2
+
+### Testing solution version 2
+
 When we make this change, we find that we have fixed the accuracy problem but we see a massive decrease in performance.  Our test for 100,000 now takes over 5 seconds!
 
-```ruby
+```python
 There are 9592 prime numbers between 0 and 100000.
 The largest prime is 99991.
 The calculation took 5.072026491165161 seconds.
@@ -350,12 +379,14 @@ The calculation took 5.072026491165161 seconds.
 Because now we have to sort the list for each iteration of the loop in order to get the minimum value, it's a lot slower than what we saw with version 1.  Especially as we go for higher numbers of primes and longer lists!
 
 ---
-## solution version 3
+
+## Solution version 3
+
 After further research we find there is such a thing as an OrderedSet in the ordered_set package.  You have to install it with pip install ordered_set before you can use it. Optimistically, we will try this out.
 
 Let's see what happens.  Here is the code:
 
-```ruby
+```python
 import time
 from ordered_set import OrderedSet
 
@@ -390,11 +421,12 @@ def find_primes_under(primes_limit=20):
 ```
 
 ---
-### testing solution version 3
+
+### Testing solution version 3
 
 Unfortunately, although using this new type lets us go back to the old pop approach, and it works accurately, it was still no quicker than using the sorted option above, in my tests.  In fact it was slower!  7 seconds for 100,000 primes.  Not impressed.
 
-```ruby
+```python
 primes_list = find_primes_under(100000)
 
 >>> There are 9592 prime numbers between 0 and 100000.
@@ -403,12 +435,14 @@ primes_list = find_primes_under(100000)
 ```
 
 ---
-## solution version 4
+
+## Solution version 4
+
 So, lets go back to the drawing board, and to the Python built-in types, and think through the logic again.  There's got to be a simple solution using what we know.
 
 We want the ordered nature of a list, and we want to be able to quickly eliminate multiples of our primes using the set functionality.  So, let's try using both types, and use the right tool for each job.
 
-```ruby
+```python
 import time
 
 def find_primes_under(primes_limit=20):
@@ -453,9 +487,10 @@ def find_primes_under(primes_limit=20):
 ```
 
 ---
-### testing solution version 4
 
-```ruby
+### Testing solution version 4
+
+```python
 primes_list = find_primes_under(100000)
 
 There are 9592 prime numbers between 0 and 100000.
@@ -470,7 +505,9 @@ The calculation took 120.53264737129211 seconds.
 ```
 
 ---
-### results of version 4
+
+### Results of version 4
+
 Ok, it's 3 am and I think that's probably as good as it's going to get, for tonight at least!  100,000 checked for primes in just under a second, and a million in 2 minutes, and no unreliable behaviour!
 
 Checking up to a million for primes in a couple of minutes is still a bit slow! and it's nothing like the sub-second performance results of our original code where were just popping off the set each time and hoping it would pick the right one.  
@@ -480,9 +517,10 @@ It's also a little bit harder to understand for future maintenance developers (o
 But you can't always have everything in software, and sometimes "good enough" has to be good enough.  
 
 ---
+
 #### random dad joke alert
 
-```ruby
+```python
 # Q. What do prime numbers and stoners have in common?  
 
 # A. They get more spaced out the higher they get...
@@ -494,10 +532,11 @@ But you can't always have everything in software, and sometimes "good enough" ha
 >Monty Python's Flying Circus.
 
 ---
+
 ## postscript added 18/10/2023  - solution version 5
 Of course, software engineers sometimes get inspiration after ignoring a problem for a while.  Especially when we're not entirely happy with the solution!  Here is a much better and more performant solution that I am much happier with.
 
-```ruby
+```python
 import time
 def find_primes_under(primes_limit=20):
     start = time.time()
@@ -538,11 +577,12 @@ def find_primes_under(primes_limit=20):
 ```
 
 ---
+
 ### testing solution version 5
 
 And the performance is pretty acceptable too!
 
-```ruby
+```python
 primes = find_primes_under()
 print(primes)
 
@@ -570,6 +610,7 @@ primes = find_primes_under(1000000)
 Oh yes.  All primes under a million, in half a second! and only using basic python functionality.  That will do.
 
 ---
+
 ## postscript added 27/10/2023  - solution version 6
 
 There's one final tweak that occurred to me, that will optimise the function even further, and I think is going to make it even more efficient than our first, inaccurate attempt!
@@ -582,7 +623,7 @@ Let's see the final, final solution!
 
 I hope you've enjoyed this little exploration into Python and Prime Numbers as much as I did, despite all the creepy crawly references in the Python development tools I'm using.  I now have Anacondas and Spyders crawling around on my machine!
 
-```ruby
+```python
 def find_primes_under(primes_limit=20):
     start = time.time()
     range_limit = primes_limit + 1
@@ -619,11 +660,12 @@ def find_primes_under(primes_limit=20):
 ```
 
 ---
-### testing solution version 6
+
+### Testing solution version 6
 
 We'll check for accuracy first with the lower limits where we can inspect the results
 
-```ruby
+```python
 primes = find_primes_under()
 print(primes)
 
@@ -642,11 +684,12 @@ print(primes)
 >>> {2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47, 53, 59, 61, 67, 71, 73, 79, 83, 89, 97}
 
 ```
+
 OK, so that's what we would expect.  Our algorithm seems to be working.
 
 Now let's try a comparative speed test on a limit of 1,000,000
 
-```ruby
+```python
 
 primes = find_primes_under(1000000)
 
@@ -655,4 +698,5 @@ primes = find_primes_under(1000000)
 >>> The calculation took 0.25096797943115234 seconds.
 
 ```
+
 Now that's impressive.  We have calculated all the prime numbers up to a million, accurately, in a quarter of a second, using only Python data types, and the Python interpreter.  This is faster than our original inaccurate algorithm as well.
