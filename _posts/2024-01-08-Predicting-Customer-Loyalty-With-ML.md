@@ -3,7 +3,7 @@ layout: post
 title: Predicting Customer Loyalty Using ML
 description: In this project, we use the Random Forest Regression Algorithm to predict missing customer loyalty score data...
 image: "/posts/customer-loyalty.jpeg"
-tags: [Customer Loyalty, Machine Learning, Regression, Python]
+tags: [Customer Loyalty, Machine Learning, Supervised Learning, Regression, Python]
 ---
 
 # Table of contents

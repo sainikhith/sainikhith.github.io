@@ -3,7 +3,7 @@ layout: post
 title: Enhancing Mailer Targeting Accuracy Using ML
 description: In this project, we use machine learning to predict offer take up and reduce mailing costs for our grocery store client...
 image: "/posts/GroceryBoxCustomers.jpg"
-tags: [Customer Targeting, Machine Learning, Classification, Python]
+tags: [Customer Targeting, Machine Learning, Supervised Learning, Classification, Python]
 ---
 
 # Table of contents
