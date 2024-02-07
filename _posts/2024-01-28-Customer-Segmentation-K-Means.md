@@ -2,7 +2,7 @@
 layout: post
 title: The "You Are What You Eat" Customer Segmentation
 description: In this project, we use k-means clustering to segment up the customer base, increasing business understanding, and enhancing the relevance of targeted messaging & customer communications....
-image: "/posts/clustering-title-img.png"
+image: "/posts/CustomerSegments.jpg"
 tags: [Customer Segmentation, Machine Learning, Unsupervised Learning, Clustering, Python]
 ---
 
@@ -68,7 +68,7 @@ To help embed this segmentation into the business, we have proposed to call this
 
 It would be interesting to run this clustering/segmentation at a lower level of product areas, so rather than just the four areas of Meat, Dairy, Fruit, Vegetables - clustering spend across the sub-categories *below* those categories.  This would mean we could create more specific clusters, and get an even more granular understanding of dietary preferences within the customer base.
 
-Here we've just focused on variables that are linked directly to sales - it could be interesting to also include customer metrics such as distance to store, gender etc to give a even more well-rounded customer segmentation.
+Here we've just focused on variables that are linked directly to sales - it could be interesting to also include customer metrics such as distance to store, gender etc to give an even more well-rounded customer segmentation.
 
 It would be useful to test other clustering approaches such as hierarchical clustering or DBSCAN to compare the results.
 <br>
@@ -78,11 +78,11 @@ ___
 
 # Data Overview  <a name="data-overview"></a>
 
-We are primarily looking to discover segments of customers based on their transactions within *food* based product areas so we will need to only select those.
+We are primarily looking to discover segments of customers based on their transactions within *food-based* product areas so we will need to only select those.
 
 In the code below, we:
 
-* Import the required python packages & libraries
+* Import the required Python packages & libraries
 * Import the tables from the database
 * Merge the tables to tag on *product_area_name* which only exists in the *product_areas* table
 * Drop the non-food categories
@@ -198,13 +198,13 @@ We don’t want any variables to be “bunched up” due to a single outlier val
 
 Again, as k-means is a distance based algorithm, in other words it is reliant on an understanding of how similar or different data points are across different dimensions in n-dimensional space, the application of Feature Scaling is extremely important.
 
-Feature Scaling is where we force the values from different columns to exist on the same scale, in order to enchance the learning capabilities of the model. There are two common approaches for this, Standardisation, and Normalisation.
+Feature Scaling is where we force the values from different columns to exist on the same scale, in order to enhance the learning capabilities of the model. There are two common approaches for this, Standardisation, and Normalisation.
 
 Standardisation rescales data to have a mean of 0, and a standard deviation of 1 - meaning most datapoints will most often fall between values of around -4 and +4.
 
 Normalisation rescales datapoints so that they exist in a range between 0 and 1.
 
-For k-means clustering, either approach is going to be *far better* than using no scaling at all.  Here, we will look to apply normalisation as this will ensure all variables will end up having the same range, fixed between 0 and 1, and therefore the k-means algorithm can judge each variable in the same context.  Standardisation *can* result in different ranges, variable to variable, and this is not so useful (although this isn't explcitly true in all scenarios).
+For k-means clustering, either approach is going to be *far better* than using no scaling at all.  Here, we will look to apply normalisation as this will ensure all variables will end up having the same range, fixed between 0 and 1, and therefore the k-means algorithm can judge each variable in the same context.  Standardisation *can* result in different ranges, variable to variable, and this is not so useful (although this isn't explicitly true in all scenarios).
 
 Another reason for choosing Normalisation over Standardisation is that our scaled data will *all* exist between 0 and 1, and these will then be compatible with any categorical variables that we have encoded as 1’s and 0’s (although we don't have any variables of this type in our task here).
 
@@ -223,6 +223,7 @@ data_for_clustering_scaled = pd.DataFrame(scale_norm.fit_transform(data_for_clus
 ```
 
 <br>
+
 ### Finding A Good Value For k <a name="kmeans-k-value"></a>
 
 At this point here, our data is ready to be fed into the k-means clustering algorithm.  Before that, however, we want to understand what number of clusters we want the data split into.
@@ -350,7 +351,7 @@ ___
 <br>
 # Application <a name="kmeans-application"></a>
 
-Even those this is a simple solution, based on high-level product areas it will help leaders in the business, and category managers gain a clearer understanding of the customer base.
+Even though this is a simple solution, based on high-level product areas it will help leaders in the business, and category managers gain a clearer understanding of the customer base.
 
 Tracking these clusters over time would allow the client to more quickly react to dietary trends, and adjust their messaging and inventory accordingly.
 
