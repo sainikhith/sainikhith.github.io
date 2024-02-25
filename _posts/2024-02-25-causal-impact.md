@@ -95,11 +95,11 @@ It must not be affected by the event that we’re measuring, but it must be pred
 
 So, in the case of randomised experiment, we could use the control group as our additional set of data.
 
-In the case where we don't have a control group, we need to find other sets of data that meet the aforementoined rules. These must not be affected by the event, but they should have some relationship or correlation with the time-series data we’re measuring.  If we were measuring stock prices, perhaps we could use other stocks that are in a similar industry to us.  If we were measuring the sales of a certain section of the grocery store, say health and beauty products, perhaps our second time-series could be the sales of another non-food category in the store.
+In the case where we don't have a control group, we need to find other sets of data that meet the aforementioned rules. These must not be affected by the event, but they should have some relationship or correlation with the time-series data we’re measuring.  If we were measuring stock prices, perhaps we could use other stocks that are in a similar industry to us.  If we were measuring the sales of a certain section of the grocery store, say health and beauty products, perhaps our second time-series could be the sales of another non-food category in the store.
 
 Either way, this additional data provides the algorithm insights into the trends of the data over time.
 
-The algorithm uses these insights to models the relationship between the two (or more) time-series in the pre-period.  In other words, it finds a set of rules that best predict the time-series of interest, based on the movements and fluctuations of the other time-series that we provided it.
+The algorithm uses these insights to model the relationship between the two (or more) time-series in the pre-period.  In other words, it finds a set of rules that best predict the time-series of interest, based on the movements and fluctuations of the other time-series that we provided it.
 
 Once the algorithm has modelled this relationship, it then looks to apply the learnings from this model in the post-period, the result of which is an estimation for the counterfactual, or what the model *believes would have happened* to our time series if our event never took place!
 
