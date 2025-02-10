@@ -9,23 +9,23 @@ plugins:
 
 #-------------------------------
 # General Site Settings
-title: Helen Abell
+title: Sri Sai Nikhith
 description: "Hi, I'm Helen. I'm a Software Engineer and Data Science enthusiast.  This portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact and data science tools and techniques. Please visit my Github & LinkedIn pages (or download my CV) by using the links below."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-author: "Helen Abell"
+author: "Sri Sai Nikhith"
 
 #-------------------------------
 # About Section
-subtitle: Data Science <span style="color:#f58506"> Portfolio </span>
-location: "Birmingham, UK"
+subtitle: Full Stack Developer <span style="color:#f58506"> Portfolio </span>
+location: "London, UK"
 resume_url: "/docs/CV_Helen Abell 2023-09-29-V1.pdf"
 avatar_image: /img/profile_picture_me.jpg
 
 #-------------------------------
 # Contact links
-linkedln: "https://www.linkedin.com/in/helen-abell/" # Add your linkedln handle
-github: "https://github.com/h3l3nabell/"  # Add your github handle
+linkedln: "https://www.linkedin.com/in/srisainikhith/" # Add your linkedln handle
+github: "https://github.com/sainikhith/"  # Add your github handle
 
 paginate: 6
 paginate_path: "/page/:num"
@@ -53,4 +53,3 @@ defaults:
 #   - vendor/cache/
 #   - vendor/gems/
 #   - vendor/ruby/
-
