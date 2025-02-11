@@ -136,3 +136,4 @@ function greet(name) {
   <summary>Click to Expand</summary>
   Hidden content goes here...
 </details>
+```
