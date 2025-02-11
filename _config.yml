@@ -10,7 +10,7 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: Vakulabharanam Sri Sai Nikhith
-description: "Hi, I'm Sai Nikhith. I'm a Software Trainer. Please visit my Github & LinkedIn pages (or download my CV) by using the links below."
+description: "Hi, I'm Vakulabharanm Sri Sai Nikhith. I'm a Software Trainer. Please visit my Github & LinkedIn pages (or download my CV) by using the links below."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 author: "Sri Sai Nikhith"
