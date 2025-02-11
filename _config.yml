@@ -1,5 +1,5 @@
 # Remote theme directory
-remote_theme: benbalter/retlab
+remote_theme: h3l3nabell/analytics-link.github.io
 
 plugins:
   - jekyll-paginate
