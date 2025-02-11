@@ -2,7 +2,7 @@
 layout: post
 title: [Project Title]
 description: [Brief description of the project]
-image: [Path to image]
+image: "/posts/step8up-template.png"
 tags: [Tag1, Tag2, Tag3]
 ---
 

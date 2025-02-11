@@ -2,7 +2,7 @@
 layout: post
 title: Finding Prime Numbers with Python
 description: Creating a function in Python that can quickly find all the Prime numbers below a given value
-image: "/posts/IncidenceOfPrimes.jpg"
+image: "/posts/step8up-template.png"
 tags: [Python, Primes]
 ---
 
