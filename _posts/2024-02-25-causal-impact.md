@@ -1,9 +1,14 @@
 ---
 layout: post
-title: [Project Title]
-description: [Brief description of the project]
-image: [Path to image]
-tags: [Tag1, Tag2, Tag3]
+title: Project Title
+description:
+  - Brief description of the project
+image:
+  - Path to image
+tags:
+  - Tag1
+  - Tag2
+  - Tag3
 ---
 
 ## Table of Contents
@@ -136,3 +141,4 @@ function greet(name) {
   <summary>Click to Expand</summary>
   Hidden content goes here...
 </details>
+```
