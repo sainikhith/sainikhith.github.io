@@ -10,7 +10,7 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: Sri Sai Nikhith
-description: "Hi, I'm Helen. I'm a Software Engineer and Data Science enthusiast.  This portfolio focuses on interesting projects I've recently undertaken, with a strong emphasis on business impact and data science tools and techniques. Please visit my Github & LinkedIn pages (or download my CV) by using the links below."
+description: "Hi, I'm Sai Nikhith. I'm a Software Trainer. Please visit my Github & LinkedIn pages (or download my CV) by using the links below."
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 author: "Sri Sai Nikhith"
@@ -19,7 +19,7 @@ author: "Sri Sai Nikhith"
 # About Section
 subtitle: Full Stack Developer <span style="color:#f58506"> Portfolio </span>
 location: "London, UK"
-resume_url: "/docs/CV_Helen Abell 2023-09-29-V1.pdf"
+resume_url: "/docs/sri_sai_nikhith_CV.pdf"
 avatar_image: /img/profile_picture_me.jpg
 
 #-------------------------------
