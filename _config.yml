@@ -1,5 +1,5 @@
 # Remote theme directory
-remote_theme: h3l3nabell/analytics-link.github.io
+remote_theme: sainikhith/analytics-link.github.io
 
 plugins:
   - jekyll-paginate
